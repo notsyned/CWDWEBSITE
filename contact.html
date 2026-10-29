@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us — Camiling Water District</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<div class="gov-bar">
+  <div class="container">
+    <span>Official Website of the Camiling Water District</span>
+    <nav aria-label="Government links">
+      <a href="transparency.html#seal" class="ts-seal-link"><img src="assets/transparency-seal.png" alt="" class="ts-seal-img" aria-hidden="true">Transparency Seal</a>
+      <a href="transparency.html#charter">Citizen's Charter</a>
+      <a href="transparency.html#foi">FOI</a>
+    </nav>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="assets/cwd-logo.png" alt="Camiling Water District" class="brand-logo">
+      <span class="brand-text"><strong>Camiling Water District</strong><em>Alagang Tubig, Alagang Pamilya</em><span>Luna St. Camiling, Tarlac</span></span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav">Menu</button>
+    <nav class="main-nav" id="main-nav" aria-label="Primary">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li class="nav-dropdown">
+          <a href="about.html">About Us</a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="about.html" role="menuitem">About CAMIWD</a></li>
+            <li><a href="about.html#pledge" class="dropdown-sub-item" role="menuitem">Our Pledge</a></li>
+            <li><hr></li>
+            <li><a href="about.html#jva" class="dropdown-sub-item" role="menuitem">Joint Venture — PrimeWater</a></li>
+          </ul>
+        </li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="payments.html">Payments</a></li>
+        <li><a href="rates.html">Rates &amp; Fees</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="content">
+
+  <section>
+    <div class="container">
+      <h1>Contact Us</h1>
+      <p style="max-width:60ch;">Have a question, a concern to report, or an application to follow up on? Reach us directly.</p>
+    </div>
+  </section>
+
+  <section class="section-tint">
+    <div class="container grid" style="grid-template-columns: 1fr 1fr; align-items:start;">
+
+      <div>
+        <h2>Office Information</h2>
+        <p><strong>Address:</strong> Luna St., Camiling, Tarlac</p>
+        <p><strong>Mobile hotline:</strong> <a href="tel:+6304593403040">(04593) 40304</a></p>
+        <p><strong>Email:</strong> <a href="mailto:Camilingwaterdistrict@gmail.com">Camilingwaterdistrict@gmail.com</a></p>
+        <p><strong>Office hours:</strong> Monday–Thursday, 8:00 AM – 5:00 PM<br><small style="color:var(--ink-soft);">Compressed work week per CSC Resolution No. 2200209</small></p>
+      </div>
+
+      <div class="card">
+        <h3>Send a message</h3>
+        <!-- SUCCESS STATE (hidden until form submits) -->
+        <div id="form-success" hidden aria-live="polite" style="text-align:center; padding:2rem 0;">
+          <svg viewBox="0 0 24 24" style="width:48px;height:48px;stroke:var(--success);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;margin:0 auto 1rem;" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+          <h4 style="color:var(--success); margin-bottom:0.5rem;">Message sent!</h4>
+          <p>We received your message and will get back to you within 1–3 business days. Thank you for reaching out.</p>
+        </div>
+        <!-- ERROR STATE (hidden until submission fails) -->
+        <p id="form-error" hidden aria-live="polite" class="notice" style="border-color:var(--danger); margin-bottom:1rem;">
+          Something went wrong. Please try again, or email us directly at <a href="mailto:Camilingwaterdistrict@gmail.com">Camilingwaterdistrict@gmail.com</a>.
+        </p>
+        <!-- CONTACT FORM — wired to Formspree -->
+        <!-- SETUP: Replace YOUR_FORM_ID below with your Formspree form ID.
+             1. Go to https://formspree.io and sign up for a free account.
+             2. Click "New Form", name it "CAMIWD Contact", set the notification email.
+             3. Copy the form ID (looks like "xpzgwkqr") from the endpoint URL.
+             4. Replace YOUR_FORM_ID in the action attribute below. -->
+        <form id="contact-form" data-validate novalidate
+              action="https://formspree.io/f/YOUR_FORM_ID"
+              method="POST">
+
+          <!-- Honeypot anti-spam field (hidden from real users) -->
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
+          <label for="fullname">Full name</label>
+          <input type="text" id="fullname" name="fullname" required autocomplete="name">
+          <p class="field-error" data-error-for="fullname" hidden>Please enter your full name.</p>
+
+          <label for="email">Email address</label>
+          <input type="email" id="email" name="email" required autocomplete="email">
+          <p class="field-error" data-error-for="email" hidden>Please enter a valid email address.</p>
+
+          <label for="subject">Subject</label>
+          <select id="subject" name="subject" required>
+            <option value="">Select one</option>
+            <option value="Billing question">Billing question</option>
+            <option value="Report a leak">Report a leak</option>
+            <option value="New connection inquiry">New connection inquiry</option>
+            <option value="Other">Other</option>
+          </select>
+          <p class="field-error" data-error-for="subject" hidden>Please select a subject.</p>
+
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="4" required></textarea>
+          <p class="field-error" data-error-for="message" hidden>Please enter your message.</p>
+
+          <div class="checkbox-row" style="margin-bottom:1rem;">
+            <input type="checkbox" id="consent" name="consent" required>
+            <label for="consent" style="font-weight:400; margin:0;">I consent to CAMIWD collecting and processing my personal information for the purpose of responding to this inquiry, in accordance with the Data Privacy Act of 2012 (RA 10173).</label>
+          </div>
+          <p class="field-error" data-error-for="consent" hidden>Consent is required to submit this form.</p>
+
+          <button type="submit" class="btn btn-primary" id="form-submit-btn">
+            <span id="btn-label">Send message</span>
+            <span id="btn-sending" hidden aria-live="polite">Sending…</span>
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div><h4>Camiling Water District</h4><p class="footer-tagline">Every Drop, For Every Camiling Family&#39;s Health. — Serving Camiling, Tarlac since 1976.</p></div>
+      <div><h4>Quick Links</h4><ul><li><a href="services.html">Services</a></li><li><a href="faq.html">FAQ</a></li><li><a href="careers.html">Careers</a></li></ul></div>
+      <div><h4>Transparency</h4><ul><li><a href="transparency.html#seal" class="ts-seal-link"><img src="assets/transparency-seal.png" alt="" class="ts-seal-img" aria-hidden="true">Transparency Seal</a></li><li><a href="transparency.html#charter">Citizen's Charter</a></li><li><a href="transparency.html#foi">Freedom of Information</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li>Luna St., Camiling, Tarlac</li><li>(04593) 40304</li><li>Camilingwaterdistrict@gmail.com</li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Camiling Water District. All rights reserved.</span>
+      <span>A GOCC chartered under PD No. 198.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/script.js"></script>
+</body>
+</html>

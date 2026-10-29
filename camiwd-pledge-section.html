@@ -1,0 +1,72 @@
+<!--
+  CAMIWD "Our Pledge" section
+  Drop this section + style block into the About Us page.
+  Uses existing brand tokens: teal #0B5D7A / #073F52, gold #C9A227,
+  Sora (headings), Public Sans (body) — assumes both fonts are already
+  loaded on the page via the site's shared styles.css / font links.
+-->
+
+<section class="camiwd-pledge" aria-labelledby="pledge-heading">
+  <h2 id="pledge-heading">Our Pledge</h2>
+  <ul class="pledge-list">
+    <li><span class="pledge-letter">C</span><span class="pledge-text"><strong>Committed</strong> to clean, safe, and reliable water for every household</span></li>
+    <li><span class="pledge-letter">A</span><span class="pledge-text"><strong>Accountable</strong> in every transaction and public service</span></li>
+    <li><span class="pledge-letter">M</span><span class="pledge-text"><strong>Mindful</strong> of the needs of every Camiling family</span></li>
+    <li><span class="pledge-letter">I</span><span class="pledge-text"><strong>Integrity</strong> in all our dealings, with the public and with each other</span></li>
+    <li><span class="pledge-letter">W</span><span class="pledge-text"><strong>Working together</strong> for a healthier, water-secure community</span></li>
+    <li><span class="pledge-letter">D</span><span class="pledge-text"><strong>Dedicated</strong> to continuous improvement and excellent service</span></li>
+  </ul>
+</section>
+
+<style>
+.camiwd-pledge {
+  background: #073F52;
+  color: #ffffff;
+  padding: 3rem 1.5rem;
+  border-radius: 8px;
+}
+.camiwd-pledge h2 {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.75rem;
+  color: #C9A227;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.pledge-list {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.pledge-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  font-family: 'Public Sans', sans-serif;
+  line-height: 1.5;
+}
+.pledge-letter {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0B5D7A;
+  color: #C9A227;
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  border-radius: 50%;
+}
+.pledge-text {
+  padding-top: 0.35rem;
+}
+@media (max-width: 600px) {
+  .camiwd-pledge { padding: 2rem 1rem; }
+  .pledge-list li { gap: 0.75rem; }
+}
+</style>

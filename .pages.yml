@@ -1,0 +1,124 @@
+media:
+  - name: images
+    label: Images
+    input: images/uploads
+    output: images/uploads
+  - name: documents
+    label: Documents
+    input: documents
+    output: documents
+
+content:
+  - name: news
+    label: News
+    type: file
+    path: data/news.json
+    format: json
+    fields:
+      - name: items
+        label: News items
+        type: object
+        list: true
+        fields:
+          - name: title
+            label: Title
+            type: string
+          - name: date
+            label: Date
+            type: date
+          - name: image
+            label: Photo
+            type: image
+            options:
+              media: images
+          - name: body
+            label: Text
+            type: text
+
+  - name: careers
+    label: Careers
+    type: file
+    path: data/careers.json
+    format: json
+    fields:
+      - name: items
+        label: Job postings
+        type: object
+        list: true
+        fields:
+          - name: title
+            label: Position title
+            type: string
+          - name: status
+            label: Status
+            type: select
+            options:
+              values: [Open, Closed]
+          - name: deadline
+            label: Application deadline
+            type: date
+          - name: description
+            label: Description and requirements
+            type: text
+          - name: document
+            label: Attached document (PDF)
+            type: file
+            options:
+              media: documents
+
+  - name: transparency
+    label: Transparency Documents
+    type: file
+    path: data/transparency.json
+    format: json
+    fields:
+      - name: items
+        label: Documents
+        type: object
+        list: true
+        fields:
+          - name: title
+            label: Document title
+            type: string
+          - name: category
+            label: Category
+            type: select
+            options:
+              values: [Annual Report, Financial Report, Procurement, Citizen's Charter, FOI, Other]
+          - name: year
+            label: Year
+            type: string
+          - name: document
+            label: File (PDF)
+            type: file
+            options:
+              media: documents
+
+  - name: rates
+    label: Rates and Fees
+    type: file
+    path: data/rates.json
+    format: json
+    fields:
+      - name: tiers
+        label: Water rate tiers
+        type: object
+        list: true
+        fields:
+          - name: label
+            label: Label (example 11-20 cu.m.)
+            type: string
+          - name: rate
+            label: Rate per cubic meter (PHP)
+            type: number
+      - name: fees
+        label: Other fees
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Fee name
+            type: string
+          - name: amount
+            label: Amount (PHP)
+            type: number

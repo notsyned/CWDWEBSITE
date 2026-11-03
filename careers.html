@@ -66,13 +66,18 @@
       <div class="section-head">
         <h2>Current Openings</h2>
       </div>
-      <div class="grid" data-unverified>
-        <div class="card">
-          <h3>[Sample: Position title]</h3>
-          <p>[Placeholder — HR/Maam Bel to provide actual open positions, plantilla items, and closing dates.]</p>
-        </div>
-      </div>
-      <p class="notice" style="margin-top:1.5rem;">This section is intended to be maintained by HR directly once the CMS is in place, so postings stay current without needing a developer.</p>
+
+      <!-- Loading state -->
+      <p id="careers-loading" style="color:var(--ink-soft);">Loading positions…</p>
+
+      <!-- Error state -->
+      <p id="careers-error" hidden style="color:var(--danger);">
+        Unable to load positions. Please <a href="contact.html">contact HR</a> directly.
+      </p>
+
+      <!-- Cards injected here -->
+      <div id="careers-list" class="grid" style="grid-template-columns:1fr;" aria-live="polite"></div>
+
     </div>
   </section>
 
@@ -104,15 +109,7 @@
   <div class="container">
     <div class="footer-grid">
       <div><h4>Camiling Water District</h4><p class="footer-tagline">Every Drop, For Every Camiling Family&#39;s Health. — Serving Camiling, Tarlac since 1976.</p></div>
-      <div><h4>Quick Links</h4><ul><li class="nav-dropdown">
-          <a href="about.html">About Us</a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="about.html" role="menuitem">About CAMIWD</a></li>
-            <li><a href="about.html#pledge" class="dropdown-sub-item" role="menuitem">Our Pledge</a></li>
-            <li><hr></li>
-            <li><a href="about.html#jva" class="dropdown-sub-item" role="menuitem">Joint Venture — PrimeWater</a></li>
-          </ul>
-        </li><li><a href="news.html">News</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><h4>Quick Links</h4><ul><li><a href="about.html">About Us</a></li><li><a href="news.html">News</a></li><li><a href="contact.html">Contact</a></li></ul></div>
       <div><h4>Transparency</h4><ul><li><a href="transparency.html#seal" class="ts-seal-link"><img src="assets/transparency-seal.png" alt="" class="ts-seal-img" aria-hidden="true">Transparency Seal</a></li><li><a href="transparency.html#charter">Citizen's Charter</a></li><li><a href="transparency.html#foi">Freedom of Information</a></li></ul></div>
       <div><h4>Contact</h4><ul><li>Luna St., Camiling, Tarlac</li><li>(04593) 40304</li><li>Camilingwaterdistrict@gmail.com</li></ul></div>
     </div>
@@ -124,5 +121,97 @@
 </footer>
 
 <script src="assets/script.js"></script>
+<script>
+(function () {
+  const list    = document.getElementById("careers-list");
+  const loading = document.getElementById("careers-loading");
+  const error   = document.getElementById("careers-error");
+
+  function formatDeadline(str) {
+    if (!str || str === "...") return null;
+    const d = new Date(str + "T00:00:00");
+    if (isNaN(d)) return str; // not ISO — return as-is
+    return d.toLocaleDateString("en-PH", { year: "numeric", month: "long", day: "numeric" });
+  }
+
+  function buildCard(item) {
+    const article = document.createElement("article");
+    article.className = "card";
+
+    const isOpen = item.status === "Open";
+    article.style.borderLeft = "4px solid " + (isOpen ? "var(--success)" : "var(--line)");
+
+    // Status badge
+    const badge = document.createElement("span");
+    badge.textContent = item.status || "Unknown";
+    badge.style.cssText = "display:inline-block; font-size:0.75rem; font-weight:700; "
+      + "text-transform:uppercase; letter-spacing:0.05em; padding:2px 8px; "
+      + "border-radius:4px; margin-bottom:0.5rem; "
+      + (isOpen
+        ? "background:rgba(47,125,79,0.12); color:var(--success);"
+        : "background:var(--bg-tint); color:var(--ink-soft);");
+
+    // Title
+    const h3 = document.createElement("h3");
+    h3.style.marginBottom = "0.4rem";
+    h3.textContent = item.title || "Untitled Position";
+
+    // Description
+    const desc = document.createElement("p");
+    desc.textContent = item.description || "";
+
+    article.appendChild(badge);
+    article.appendChild(h3);
+    article.appendChild(desc);
+
+    // Deadline
+    const deadline = formatDeadline(item.deadline);
+    if (deadline) {
+      const dl = document.createElement("p");
+      dl.style.cssText = "font-size:0.85rem; color:var(--ink-soft); margin-top:0.5rem;";
+      dl.innerHTML = "<strong>Deadline:</strong> " + deadline;
+      article.appendChild(dl);
+    }
+
+    // Document download link
+    if (item.document) {
+      const link = document.createElement("a");
+      link.href = item.document;
+      link.textContent = "⬇ Download Job Posting";
+      link.className = "btn btn-outline";
+      link.style.cssText = "margin-top:1rem; font-size:0.85rem;";
+      link.setAttribute("download", "");
+      article.appendChild(link);
+    }
+
+    return article;
+  }
+
+  fetch("data/careers.json")
+    .then(function (res) {
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      return res.json();
+    })
+    .then(function (data) {
+      loading.hidden = true;
+      // Open first, then Closed
+      const items = (data.items || []).slice().sort(function (a, b) {
+        if (a.status === b.status) return 0;
+        return a.status === "Open" ? -1 : 1;
+      });
+      if (items.length === 0) {
+        list.innerHTML = "<p>No positions posted at this time. Check back soon or <a href=\"contact.html\">contact HR</a>.</p>";
+        return;
+      }
+      items.forEach(function (item) {
+        list.appendChild(buildCard(item));
+      });
+    })
+    .catch(function () {
+      loading.hidden = true;
+      error.hidden = false;
+    });
+}());
+</script>
 </body>
 </html>

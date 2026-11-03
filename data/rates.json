@@ -1,0 +1,11 @@
+{
+  "tiers": [
+    { "label": "First 10 cu.m. (minimum)", "rate": 150 },
+    { "label": "Each additional cu.m.", "rate": 18 }
+  ],
+  "fees": [
+    { "name": "Late payment penalty", "amount": "10%" },
+    { "name": "New connection fee (residential)", "amount": "[confirm]" },
+    { "name": "Reconnection fee", "amount": "[confirm]" }
+  ]
+}

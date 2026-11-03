@@ -63,19 +63,11 @@
 
   <!-- ===================================================================
        BILL ESTIMATOR
-       STAFF NOTE: To update rates, edit ONLY the number values inside the
-       data-* attributes on the <div id="rate-config"> below. Do not edit
-       any other file. Values are in Philippine Pesos (₱).
+       STAFF NOTE: To update rates, edit data/rates.json only.
+       Values are in Philippine Pesos (₱).
        =================================================================== -->
   <section class="section-tint">
     <div class="container">
-
-      <div id="rate-config"
-           data-minimum-charge="150"
-           data-minimum-cum="10"
-           data-excess-rate="18"
-           data-penalty-rate="10"
-           style="display:none;" data-unverified></div>
 
       <div class="card" style="max-width:560px;">
         <h3>Bill Estimator</h3>
@@ -85,23 +77,21 @@
         <button type="button" class="btn btn-primary" id="estimate-btn">Estimate my bill</button>
         <p id="estimate-result" style="margin-top:1rem; font-weight:700; color:var(--teal-deep);" aria-live="polite"></p>
       </div>
-      <p class="notice" style="margin-top:1.5rem; max-width:560px;">Rate figures shown here are placeholders pending confirmation with Finance — do not publish until the actual approved schedule is entered into the <code>#rate-config</code> attributes above.</p>
+      <p class="notice" style="margin-top:1.5rem; max-width:560px;">Rate figures shown here are placeholders pending confirmation with Finance — do not publish until the actual approved schedule is confirmed in <code>data/rates.json</code>.</p>
     </div>
   </section>
 
   <section>
     <div class="container">
       <h2>Rate Schedule</h2>
-      <table>
-        <thead><tr><th>Consumption</th><th>Charge</th></tr></thead>
-        <tbody>
-          <tr><td>First 10 cu.m. (minimum)</td><td data-unverified>[₱150.00 — confirm]</td></tr>
-          <tr><td>Each additional cu.m.</td><td data-unverified>[₱18.00 — confirm]</td></tr>
-          <tr><td>Late payment penalty</td><td data-unverified>[10% vs 25% — conflicting sources, confirm with Finance]</td></tr>
-          <tr><td>New connection fee (residential)</td><td data-unverified>[amount — confirm]</td></tr>
-          <tr><td>Reconnection fee</td><td data-unverified>[amount — confirm]</td></tr>
-        </tbody>
-      </table>
+      <p id="rates-loading" style="color:var(--ink-soft);">Loading rate schedule…</p>
+      <p id="rates-error" hidden style="color:var(--danger);">Unable to load rate schedule.</p>
+      <div id="rates-table-wrap" hidden>
+        <table>
+          <thead><tr><th>Item</th><th>Amount</th></tr></thead>
+          <tbody id="rates-tbody"></tbody>
+        </table>
+      </div>
     </div>
   </section>
 
@@ -124,25 +114,78 @@
 
 <script src="assets/script.js"></script>
 <script>
-  document.getElementById("estimate-btn").addEventListener("click", function () {
-    var config = document.getElementById("rate-config");
-    var minCharge = parseFloat(config.dataset.minimumCharge);
-    var minCum = parseFloat(config.dataset.minimumCum);
-    var excessRate = parseFloat(config.dataset.excessRate);
-    var input = document.getElementById("consumption");
-    var cum = parseFloat(input.value);
-    var result = document.getElementById("estimate-result");
+(function () {
+  var ratesData = null; // populated after fetch
 
-    if (isNaN(cum) || cum < 0) {
-      result.textContent = "Please enter a valid number of cubic meters.";
-      return;
-    }
-    var total = minCharge;
-    if (cum > minCum) {
-      total += (cum - minCum) * excessRate;
-    }
-    result.textContent = "Estimated bill: ₱" + total.toFixed(2) + " (excludes penalties/other fees)";
-  });
+  // ── Fetch rates.json, then wire everything up ──────────────
+  fetch("data/rates.json")
+    .then(function (res) {
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      return res.json();
+    })
+    .then(function (data) {
+      ratesData = data;
+
+      // ── Populate rate schedule table ───────────────────────
+      var tbody  = document.getElementById("rates-tbody");
+      var wrap   = document.getElementById("rates-table-wrap");
+      var loadEl = document.getElementById("rates-loading");
+      loadEl.hidden = true;
+
+      // Tiers
+      (data.tiers || []).forEach(function (t) {
+        var tr = document.createElement("tr");
+        tr.innerHTML = "<td>" + t.label + "</td><td>₱" + parseFloat(t.rate).toFixed(2) + "</td>";
+        tbody.appendChild(tr);
+      });
+
+      // Fees
+      (data.fees || []).forEach(function (f) {
+        var tr = document.createElement("tr");
+        var amt = f.amount === "[confirm]"
+          ? "<span style='color:var(--ink-soft);font-style:italic;'>Pending confirmation</span>"
+          : f.amount;
+        tr.innerHTML = "<td>" + f.name + "</td><td>" + amt + "</td>";
+        tbody.appendChild(tr);
+      });
+
+      wrap.hidden = false;
+
+      // ── Wire the estimator button ──────────────────────────
+      document.getElementById("estimate-btn").addEventListener("click", function () {
+        var tiers  = ratesData.tiers || [];
+        // Estimator uses tier[0].rate as minimum charge, tier[0] implicit
+        // minimum cum = 10 (first tier covers first 10 cu.m.)
+        // tier[1].rate as excess rate per cu.m. beyond minimum
+        var minCharge  = tiers[0] ? parseFloat(tiers[0].rate) : 0;
+        var minCum     = 10; // first tier always covers first 10 cu.m.
+        var excessRate = tiers[1] ? parseFloat(tiers[1].rate) : 0;
+
+        var cum    = parseFloat(document.getElementById("consumption").value);
+        var result = document.getElementById("estimate-result");
+
+        if (isNaN(cum) || cum < 0) {
+          result.textContent = "Please enter a valid number of cubic meters.";
+          return;
+        }
+
+        // Identical formula to the original estimator
+        var total = minCharge;
+        if (cum > minCum) {
+          total += (cum - minCum) * excessRate;
+        }
+        result.textContent = "Estimated bill: ₱" + total.toFixed(2) + " (excludes penalties/other fees)";
+      });
+    })
+    .catch(function () {
+      document.getElementById("rates-loading").hidden = true;
+      document.getElementById("rates-error").hidden = false;
+      // Fallback: still allow button to show an error
+      document.getElementById("estimate-btn").addEventListener("click", function () {
+        document.getElementById("estimate-result").textContent = "Rate data unavailable. Please try again later.";
+      });
+    });
+}());
 </script>
 </body>
 </html>

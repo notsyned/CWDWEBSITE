@@ -660,6 +660,47 @@ input, textarea, select {
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 
+/* ---------- Person cards (Board / Management) ---------- */
+.person-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.person-photo {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: var(--space-2);
+  border: 3px solid var(--line);
+  flex-shrink: 0;
+}
+/* Neutral placeholder shown when no photo is provided */
+.person-photo-placeholder {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: var(--bg-tint);
+  border: 3px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-2);
+  flex-shrink: 0;
+}
+.person-photo-placeholder svg {
+  width: 44px;
+  height: 44px;
+  stroke: var(--line);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.person-card h3 { font-size: 1rem; margin-bottom: 0.15rem; }
+.person-card p  { font-size: 0.88rem; margin: 0; }
+
 /* ---------- Placeholder flag (dev-only visual cue; remove before publish) ---------- */
 [data-unverified] { outline: 2px dashed var(--danger); outline-offset: 2px; }
 

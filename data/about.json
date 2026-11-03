@@ -1,0 +1,12 @@
+{
+  "board": [
+    { "name": "Antonio Felix L. Gorospe", "position": "Board Chairperson",  "photo": "" },
+    { "name": "Romy D. Garcia",           "position": "Vice Chairperson",   "photo": "" },
+    { "name": "Engr. Danilo A. Agustin",  "position": "Secretary",          "photo": "" },
+    { "name": "Editha L. Rosete",         "position": "Board Member",       "photo": "" },
+    { "name": "Jude Theo G. Basilio",     "position": "Board Member",       "photo": "" }
+  ],
+  "management": [
+    { "name": "Pepito M. Pacada", "title": "General Manager", "office": "", "photo": "" }
+  ]
+}

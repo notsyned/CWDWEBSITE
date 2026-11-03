@@ -80,13 +80,17 @@
         <h2>Leadership</h2>
         <p>CAMIWD is governed by a Board of Directors and managed day-to-day by the General Manager.</p>
       </div>
-      <div class="grid">
-        <div class="card"><h3>Pepito M. Pacada</h3><p>General Manager</p></div>
-        <div class="card"><h3>Antonio Felix L. Gorospe</h3><p>Board Chairperson</p></div>
-        <div class="card"><h3>Romy D. Garcia</h3><p>Vice Chairperson</p></div>
-        <div class="card"><h3>Engr. Danilo A. Agustin</h3><p>Secretary</p></div>
-        <div class="card"><h3>Editha L. Rosete</h3><p>Board Member</p></div>
-        <div class="card"><h3>Jude Theo G. Basilio</h3><p>Board Member</p></div>
+
+      <!-- Board of Directors -->
+      <h3 style="margin-bottom:1rem; color:var(--teal-deep);">Board of Directors</h3>
+      <p id="board-loading" style="color:var(--ink-soft);">Loading…</p>
+      <p id="board-error" hidden style="color:var(--danger);">Unable to load board information.</p>
+      <div id="board-list" class="grid" aria-live="polite"></div>
+
+      <!-- Management — hidden if empty -->
+      <div id="management-section" hidden>
+        <h3 style="margin:2rem 0 1rem; color:var(--teal-deep);">Management</h3>
+        <div id="management-list" class="grid" aria-live="polite"></div>
       </div>
     </div>
   </section>
@@ -162,5 +166,64 @@
 </footer>
 
 <script src="assets/script.js"></script>
+<script>
+(function () {
+
+  // SVG used as neutral photo placeholder (aria-hidden — decorative)
+  var PLACEHOLDER_SVG =
+    '<div class="person-photo-placeholder" aria-hidden="true">'
+    + '<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/>'
+    + '<path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>';
+
+  function buildPersonCard(name, subtitle) {
+    // subtitle = position (board) or title (management)
+    var card = document.createElement("div");
+    card.className = "card person-card";
+    card.innerHTML = PLACEHOLDER_SVG
+      + '<h3>' + name + '</h3>'
+      + '<p>' + subtitle + '</p>';
+    return card;
+  }
+
+  fetch("data/about.json")
+    .then(function (res) {
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      return res.json();
+    })
+    .then(function (data) {
+      // ── Board ──────────────────────────────────────────────
+      var boardLoading = document.getElementById("board-loading");
+      var boardList    = document.getElementById("board-list");
+      boardLoading.hidden = true;
+
+      var board = data.board || [];
+      if (board.length === 0) {
+        boardList.innerHTML = "<p style='color:var(--ink-soft);'>Board information not available.</p>";
+      } else {
+        board.forEach(function (member) {
+          boardList.appendChild(buildPersonCard(member.name, member.position));
+        });
+      }
+
+      // ── Management ─────────────────────────────────────────
+      var mgmt = data.management || [];
+      if (mgmt.length > 0) {
+        var mgmtSection = document.getElementById("management-section");
+        var mgmtList    = document.getElementById("management-list");
+        mgmt.forEach(function (person) {
+          var subtitle = person.title + (person.office ? " · " + person.office : "");
+          mgmtList.appendChild(buildPersonCard(person.name, subtitle));
+        });
+        mgmtSection.hidden = false;
+      }
+      // If management is empty, the section stays hidden — no action needed
+    })
+    .catch(function () {
+      document.getElementById("board-loading").hidden = true;
+      document.getElementById("board-error").hidden = false;
+    });
+
+}());
+</script>
 </body>
 </html>

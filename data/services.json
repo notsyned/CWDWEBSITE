@@ -1,0 +1,34 @@
+{
+  "items": [
+    {
+      "name": "Reconnection",
+      "description": "Restore service after disconnection due to non-payment, once dues are settled.",
+      "requirements": ["Settlement of past dues", "Valid government ID", "Accomplished application form"]
+    },
+    {
+      "name": "Meter testing",
+      "description": "Request a meter accuracy test if you believe your reading is incorrect.",
+      "requirements": ["Valid government ID"]
+    },
+    {
+      "name": "Leak reporting",
+      "description": "Report visible leaks in mainlines or service lines for repair scheduling.",
+      "requirements": []
+    },
+    {
+      "name": "Transfer of ownership",
+      "description": "Update account records when a property or connection changes hands.",
+      "requirements": ["Valid government ID", "Proof of property/lot right", "Accomplished application form"]
+    },
+    {
+      "name": "Change of meter location",
+      "description": "Request relocation of an existing meter within the same property.",
+      "requirements": ["Valid government ID", "Accomplished application form"]
+    },
+    {
+      "name": "Senior citizen / PWD discount",
+      "description": "Applicable billing discounts per RA 9994 and RA 10754, subject to verification.",
+      "requirements": ["Valid government ID", "Senior citizen ID or PWD ID"]
+    }
+  ]
+}

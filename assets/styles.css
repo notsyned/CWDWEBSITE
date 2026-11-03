@@ -662,3 +662,33 @@ input, textarea, select {
 
 /* ---------- Placeholder flag (dev-only visual cue; remove before publish) ---------- */
 [data-unverified] { outline: 2px dashed var(--danger); outline-offset: 2px; }
+
+/* ---------- Project status badges ---------- */
+/* All badges meet WCAG 2.1 AA 4.5:1 contrast on white card backgrounds */
+.project-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 2px 9px;
+  border-radius: 3px;
+  margin-bottom: 0.5rem;
+}
+/* Ongoing — teal bg (#0B5D7A) white text → contrast ~6.8:1 ✓ */
+.project-badge-ongoing  { background: var(--teal);      color: var(--white); }
+/* Planned  — gold bg (#C9A227) teal-deep text → contrast ~5.8:1 ✓ */
+.project-badge-planned  { background: var(--gold);      color: var(--teal-deep); }
+/* Completed — success bg (#2F7D4F) white text → contrast ~5.1:1 ✓ */
+.project-badge-completed { background: var(--success);  color: var(--white); }
+
+/* Project card photo */
+.project-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: var(--radius) var(--radius) 0 0;
+  display: block;
+  margin: calc(-1 * var(--space-3)) calc(-1 * var(--space-3)) var(--space-2);
+  width: calc(100% + 2 * var(--space-3));
+}

@@ -1,6 +1,12 @@
 media:
-  input: images/uploads
-  output: /images/uploads
+  - name: images
+    label: Images
+    input: images/uploads
+    output: images/uploads
+  - name: documents
+    label: Documents
+    input: documents
+    output: documents
 
 content:
   - name: news
@@ -23,6 +29,41 @@ content:
           - name: image
             label: Photo
             type: image
+            options:
+              media: images
           - name: body
             label: Text
             type: text
+
+  - name: careers
+    label: Careers
+    type: file
+    path: data/careers.json
+    format: json
+    fields:
+      - name: items
+        label: Job postings
+        type: object
+        list: true
+        fields:
+          - name: title
+            label: Position title
+            type: string
+          - name: status
+            label: Status
+            type: select
+            options:
+              values: [Open, Closed]
+          - name: deadline
+            label: Application deadline
+            type: date
+          - name: description
+            label: Description and requirements
+            type: text
+          - name: document
+            label: Attached document (PDF)
+            type: file
+            options:
+              media: documents
+
+  

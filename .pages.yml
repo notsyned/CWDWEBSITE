@@ -158,3 +158,58 @@ content:
       - name: banner_message
         label: Banner message
         type: text
+
+  - name: services
+    label: Services
+    type: file
+    path: data/services.json
+    format: json
+    fields:
+      - name: items
+        label: Services
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Service name
+            type: string
+          - name: description
+            label: Description
+            type: text
+          - name: requirements
+            label: Requirements (optional)
+            type: text
+
+  - name: projects
+    label: Projects
+    type: file
+    path: data/projects.json
+    format: json
+    fields:
+      - name: items
+        label: Projects
+        type: object
+        list: true
+        fields:
+          - name: title
+            label: Project title
+            type: string
+          - name: status
+            label: Status
+            type: select
+            options:
+              values: [Planned, Ongoing, Completed]
+          - name: location
+            label: Location or barangay
+            type: string
+          - name: updated
+            label: Last updated
+            type: date
+          - name: image
+            label: Photo
+            type: image
+            options:
+              media: images
+          - name: description
+            label: Description
+            type: text

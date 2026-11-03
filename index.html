@@ -24,6 +24,14 @@
   </div>
 </div>
 
+<!-- Announcement banner — injected by script when banner_show=true in data/homepage.json -->
+<div id="site-banner" class="site-banner" role="region" aria-label="Site announcement" aria-live="polite" hidden>
+  <div class="container">
+    <span class="site-banner-label" id="banner-label"></span>
+    <span class="site-banner-message" id="banner-message"></span>
+  </div>
+</div>
+
 <!-- Header -->
 <header class="site-header">
   <div class="container">
@@ -51,6 +59,7 @@
         <li><a href="rates.html">Rates &amp; Fees</a></li>
         <li><a href="careers.html">Careers</a></li>
         <li><a href="news.html">News</a></li>
+        <li><a href="faq.html">FAQ</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
@@ -126,20 +135,15 @@
     </div>
   </section>
 
-  <!-- Announcements teaser -->
+  <!-- Latest News — loaded from data/news.json, 3 newest items -->
   <section class="section-tint">
     <div class="container">
       <div class="section-head">
-        <h2>Announcements</h2>
+        <h2>Latest News</h2>
         <p>Advisories, schedule changes, and district updates.</p>
       </div>
-      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(260px,1fr));">
-        <div class="card" style="border-left: 4px solid var(--teal);">
-          <p style="font-size:0.8rem; color:var(--ink-soft); margin-bottom:0.3rem;">July 16, 2026 · Office Advisory</p>
-          <h3>CSC Compressed Workweek Now in Effect</h3>
-          <p>CAMIWD operates Monday–Thursday, 8:00 AM–5:00 PM under the CSC Flexible Work Arrangement policy per OP Memorandum Circular No. 114, s. 2026.</p>
-          <p><a href="news.html">Read full advisory →</a></p>
-        </div>
+      <div id="latest-news-list" class="grid" style="grid-template-columns: repeat(auto-fit, minmax(260px,1fr));" aria-live="polite">
+        <p id="latest-news-loading" style="color:var(--ink-soft);">Loading…</p>
       </div>
       <p style="margin-top:1.5rem;"><a href="news.html" class="btn btn-outline">See all announcements</a></p>
     </div>
@@ -158,15 +162,7 @@
       <div>
         <h4>Quick Links</h4>
         <ul>
-          <li class="nav-dropdown">
-          <a href="about.html">About Us</a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="about.html" role="menuitem">About CAMIWD</a></li>
-            <li><a href="about.html#pledge" class="dropdown-sub-item" role="menuitem">Our Pledge</a></li>
-            <li><hr></li>
-            <li><a href="about.html#jva" class="dropdown-sub-item" role="menuitem">Joint Venture — PrimeWater</a></li>
-          </ul>
-        </li>
+          <li><a href="about.html">About Us</a></li>
           <li><a href="services.html">Services</a></li>
           <li><a href="careers.html">Careers</a></li>
         </ul>
@@ -196,5 +192,80 @@
 </footer>
 
 <script src="assets/script.js"></script>
+<script>
+(function () {
+
+  // ── 1. Announcement banner ─────────────────────────────────────
+  fetch("data/homepage.json")
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      if (data.banner_show === true) {
+        var banner  = document.getElementById("site-banner");
+        var label   = document.getElementById("banner-label");
+        var message = document.getElementById("banner-message");
+        label.textContent   = data.banner_label   || "Notice";
+        message.textContent = data.banner_message || "";
+        banner.hidden = false;
+      }
+    })
+    .catch(function () { /* banner stays hidden on error */ });
+
+  // ── 2. Latest News — 3 newest from data/news.json ─────────────
+  var newsList    = document.getElementById("latest-news-list");
+  var newsLoading = document.getElementById("latest-news-loading");
+
+  function formatDate(iso) {
+    if (!iso || iso === "...") return "";
+    var d = new Date(iso + "T00:00:00");
+    if (isNaN(d)) return iso;
+    return d.toLocaleDateString("en-PH", { year: "numeric", month: "long", day: "numeric" });
+  }
+
+  fetch("data/news.json")
+    .then(function (res) {
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      return res.json();
+    })
+    .then(function (data) {
+      newsLoading.remove();
+
+      var items = (data.items || [])
+        .filter(function (item) { return item.date && item.date !== "..."; })
+        .sort(function (a, b) { return new Date(b.date) - new Date(a.date); })
+        .slice(0, 3);
+
+      if (items.length === 0) {
+        newsList.innerHTML = "<p style='color:var(--ink-soft);'>No announcements at this time.</p>";
+        return;
+      }
+
+      items.forEach(function (item) {
+        var card = document.createElement("div");
+        card.className = "card";
+        card.style.borderLeft = "4px solid var(--teal)";
+
+        var date = document.createElement("p");
+        date.style.cssText = "font-size:0.8rem; color:var(--ink-soft); margin-bottom:0.3rem;";
+        date.textContent = formatDate(item.date);
+
+        var h3 = document.createElement("h3");
+        h3.textContent = item.title || "Untitled";
+
+        var link = document.createElement("p");
+        link.innerHTML = '<a href="news.html">Read full advisory →</a>';
+
+        card.appendChild(date);
+        card.appendChild(h3);
+        card.appendChild(link);
+        newsList.appendChild(card);
+      });
+    })
+    .catch(function () {
+      newsLoading.remove();
+      newsList.innerHTML = "<p style='color:var(--ink-soft);'>Unable to load latest news.</p>";
+    });
+
+}());
+</script>
 </body>
 </html>

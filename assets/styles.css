@@ -76,7 +76,40 @@ textarea:focus-visible, select:focus-visible {
   * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
 
-/* ---------- Government identity bar ---------- */
+/* ---------- Announcement banner (homepage) ---------- */
+/* Hidden by default; shown only when banner_show=true in data/homepage.json */
+.site-banner {
+  background: var(--gold);
+  color: var(--teal-deep);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.6rem var(--space-3);
+  /* Minimum 4.5:1 contrast: gold #C9A227 on teal-deep #073F52 = ~5.8:1 ✓ */
+}
+.site-banner .container {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+.site-banner-label {
+  display: inline-block;
+  background: var(--teal-deep);
+  color: var(--white);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 2px 8px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.site-banner-message {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ---------- Gov-bar ---------- */
 .gov-bar {
   background: var(--teal-deep);
   color: var(--white);

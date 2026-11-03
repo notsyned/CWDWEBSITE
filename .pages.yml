@@ -140,3 +140,21 @@ content:
           - name: answer
             label: Answer
             type: text
+
+  - name: homepage
+    label: Homepage Banner
+    type: file
+    path: data/homepage.json
+    format: json
+    fields:
+      - name: banner_show
+        label: Show the banner?
+        type: boolean
+      - name: banner_label
+        label: Banner type
+        type: select
+        options:
+          values: [Notice, Advisory, Water Interruption]
+      - name: banner_message
+        label: Banner message
+        type: text

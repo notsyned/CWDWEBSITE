@@ -34,6 +34,19 @@ content:
           - name: body
             label: Text
             type: text
+          - name: attachments
+            label: Attachments (optional)
+            type: object
+            list: true
+            fields:
+              - name: name
+                label: Name shown to the public
+                type: string
+              - name: file
+                label: File (PDF)
+                type: file
+                options:
+                  media: documents
 
   - name: careers
     label: Careers
@@ -122,6 +135,11 @@ content:
           - name: amount
             label: Amount (PHP)
             type: number
+      - name: schedule_pdf
+        label: Official rate schedule (PDF, optional)
+        type: file
+        options:
+          media: documents
 
   - name: faq
     label: FAQ
@@ -179,6 +197,19 @@ content:
           - name: requirements
             label: Requirements (optional)
             type: text
+          - name: attachments
+            label: Downloadable forms (optional)
+            type: object
+            list: true
+            fields:
+              - name: name
+                label: Name shown to the public
+                type: string
+              - name: file
+                label: File (PDF)
+                type: file
+                options:
+                  media: documents
 
   - name: projects
     label: Projects
@@ -213,6 +244,19 @@ content:
           - name: description
             label: Description
             type: text
+          - name: attachments
+            label: Attachments (optional)
+            type: object
+            list: true
+            fields:
+              - name: name
+                label: Name shown to the public
+                type: string
+              - name: file
+                label: File (PDF)
+                type: file
+                options:
+                  media: documents
 
   - name: about
     label: About Us (Board and Management)

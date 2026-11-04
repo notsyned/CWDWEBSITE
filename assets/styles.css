@@ -659,7 +659,6 @@ input, textarea, select {
 @media (max-width: 720px) {
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
-
 /* ---------- Person cards (Board / Management) ---------- */
 .person-card {
   display: flex;

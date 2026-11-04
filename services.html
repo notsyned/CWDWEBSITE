@@ -34,8 +34,7 @@
         <li class="nav-dropdown">
           <a href="about.html">About Us</a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="about.html" role="menuitem">About CAMIWD</a></li>
-            <li><a href="about.html#pledge" class="dropdown-sub-item" role="menuitem">Our Pledge</a></li>
+            <li><a href="about.html" role="menuitem">About CWD</a></li>
             <li><hr></li>
             <li><a href="about.html#jva" class="dropdown-sub-item" role="menuitem">Joint Venture — PrimeWater</a></li>
           </ul>
@@ -58,7 +57,7 @@
     <div class="services-hero-overlay"></div>
     <div class="container services-hero-content">
       <h1>Services</h1>
-      <p style="max-width:60ch;">From a brand-new connection to reporting a leak, here's what CAMIWD handles and what you'll need for each.</p>
+      <p style="max-width:60ch;">From a brand-new connection to reporting a leak, here's what CWD handles and what you'll need for each.</p>
     </div>
   </section>
 
@@ -70,7 +69,7 @@
       </div>
       <div class="grid" style="grid-template-columns: repeat(4, 1fr);">
         <div class="card"><div class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg></div><h3>1. Submit requirements</h3><p>Application form, valid ID, proof of property/lot ownership or authorization.</p></div>
-        <div class="card"><div class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div><h3>2. Site inspection</h3><p>CAMIWD staff inspect the connection site and assess feasibility.</p></div>
+        <div class="card"><div class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div><h3>2. Site inspection</h3><p>CWD staff inspect the connection site and assess feasibility.</p></div>
         <div class="card"><div class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div><h3>3. Pay connection fee</h3><p>Settle the applicable connection and meter installation fee.</p></div>
         <div class="card"><div class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12l2-2 4 4L19 4l2 2"/><path d="M3 19h18"/></svg></div><h3>4. Installation</h3><p>Meter installed and service activated, typically within <span data-unverified>[processing time — confirm]</span>.</p></div>
       </div>
@@ -111,7 +110,7 @@
     <div class="container">
       <div class="section-head">
         <h2 id="projects-heading">Projects</h2>
-        <p>Infrastructure and service improvement projects by CAMIWD.</p>
+        <p>Infrastructure and service improvement projects by CWD.</p>
       </div>
       <!-- Cards injected here; shown Ongoing → Planned → Completed -->
       <div id="projects-list" class="grid" aria-live="polite"></div>
@@ -131,6 +130,7 @@
     <div class="footer-bottom">
       <span>&copy; 2026 Camiling Water District. All rights reserved.</span>
       <span>A GOCC chartered under PD No. 198.</span>
+      <span>Website developed by: Denys Bryante B. Reed</span>
     </div>
   </div>
 </footer>
@@ -138,6 +138,28 @@
 <script src="assets/script.js"></script>
 <script>
 (function () {
+
+  // Shared helper — renders an attachments list under a card element
+  // att = [{name, file}, ...]  — items without both fields are silently skipped
+  function buildAttachments(attachments, parentEl) {
+    if (!attachments || attachments.length === 0) return;
+    var attList = document.createElement("ul");
+    attList.style.cssText = "list-style:none; padding:0; margin-top:0.75rem;";
+    attachments.forEach(function (att) {
+      if (!att.file || !att.name) return;
+      var li = document.createElement("li");
+      li.style.marginBottom = "0.35rem";
+      var a = document.createElement("a");
+      a.href = att.file;
+      a.download = "";
+      a.textContent = att.name + " (PDF)";
+      a.style.cssText = "font-size:0.88rem; font-weight:600;";
+      a.setAttribute("aria-label", "Download " + att.name + " (PDF)");
+      li.appendChild(a);
+      attList.appendChild(li);
+    });
+    if (attList.children.length > 0) parentEl.appendChild(attList);
+  }
 
   // ── Other Services ─────────────────────────────────────────────
   var servicesList    = document.getElementById("services-list");
@@ -186,6 +208,9 @@
           card.appendChild(reqHeading);
           card.appendChild(ul);
         }
+
+        // Attachments
+        buildAttachments(item.attachments, card);
 
         servicesList.appendChild(card);
       });
@@ -274,6 +299,9 @@
           metaP.textContent = meta.join(" · ");
           body.appendChild(metaP);
         }
+
+        // Attachments
+        buildAttachments(item.attachments, body);
 
         card.appendChild(body);
         projectsList.appendChild(card);

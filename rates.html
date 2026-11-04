@@ -34,8 +34,7 @@
         <li class="nav-dropdown">
           <a href="about.html">About Us</a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="about.html" role="menuitem">About CAMIWD</a></li>
-            <li><a href="about.html#pledge" class="dropdown-sub-item" role="menuitem">Our Pledge</a></li>
+            <li><a href="about.html" role="menuitem">About CWD</a></li>
             <li><hr></li>
             <li><a href="about.html#jva" class="dropdown-sub-item" role="menuitem">Joint Venture — PrimeWater</a></li>
           </ul>
@@ -69,6 +68,15 @@
        =================================================================== -->
   <section class="section-tint">
     <div class="container">
+
+      <!-- Official rate schedule PDF — shown by script only when schedule_pdf is set in data/rates.json -->
+      <p id="schedule-pdf-wrap" hidden style="margin-bottom:1.5rem;">
+        <a id="schedule-pdf-link" href="#" download
+           style="font-weight:700; font-size:0.95rem;"
+           aria-label="Download the official rate schedule (PDF)">
+          ⬇ Download the official rate schedule (PDF)
+        </a>
+      </p>
 
       <div class="card" style="max-width:560px;">
         <h3>Bill Estimator</h3>
@@ -110,6 +118,7 @@
     <div class="footer-bottom">
       <span>&copy; 2026 Camiling Water District. All rights reserved.</span>
       <span>A GOCC chartered under PD No. 198.</span>
+      <span>Website developed by: Denys Bryante B. Reed</span>
     </div>
   </div>
 </footer>
@@ -127,6 +136,14 @@
     })
     .then(function (data) {
       ratesData = data;
+
+      // ── Official rate schedule PDF ─────────────────────────
+      if (data.schedule_pdf) {
+        var pdfWrap = document.getElementById("schedule-pdf-wrap");
+        var pdfLink = document.getElementById("schedule-pdf-link");
+        pdfLink.href = data.schedule_pdf;
+        pdfWrap.hidden = false;
+      }
 
       // ── Populate rate schedule table ───────────────────────
       var tbody  = document.getElementById("rates-tbody");

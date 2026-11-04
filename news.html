@@ -34,8 +34,7 @@
         <li class="nav-dropdown">
           <a href="about.html">About Us</a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="about.html" role="menuitem">About CAMIWD</a></li>
-            <li><a href="about.html#pledge" class="dropdown-sub-item" role="menuitem">Our Pledge</a></li>
+            <li><a href="about.html" role="menuitem">About CWD</a></li>
             <li><hr></li>
             <li><a href="about.html#jva" class="dropdown-sub-item" role="menuitem">Joint Venture — PrimeWater</a></li>
           </ul>
@@ -93,6 +92,7 @@
     <div class="footer-bottom">
       <span>&copy; 2026 Camiling Water District. All rights reserved.</span>
       <span>A GOCC chartered under PD No. 198.</span>
+      <span>Website developed by: Denys Bryante B. Reed</span>
     </div>
   </div>
 </footer>
@@ -138,6 +138,28 @@
     const p = document.createElement("p");
     p.textContent = item.body || "";
     article.appendChild(p);
+
+    // Attachments — optional list of {name, file}
+    if (item.attachments && item.attachments.length > 0) {
+      const attList = document.createElement("ul");
+      attList.style.cssText = "list-style:none; padding:0; margin-top:0.75rem;";
+      item.attachments.forEach(function (att) {
+        if (!att.file || !att.name) return;
+        const li  = document.createElement("li");
+        li.style.marginBottom = "0.35rem";
+        const a   = document.createElement("a");
+        a.href     = att.file;
+        a.download = "";
+        // Accessible: name + file type in link text so context is clear out of flow
+        a.textContent = att.name + " (PDF)";
+        a.style.cssText = "font-size:0.88rem; font-weight:600;";
+        // Announce download intent to screen readers
+        a.setAttribute("aria-label", "Download " + att.name + " (PDF)");
+        li.appendChild(a);
+        attList.appendChild(li);
+      });
+      if (attList.children.length > 0) article.appendChild(attList);
+    }
 
     return article;
   }

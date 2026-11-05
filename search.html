@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search — Camiling Water District</title>
+<meta name="description" content="Search the Camiling Water District website.">
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+  .result { background:var(--white,#fff); border:1px solid var(--line); border-left:4px solid var(--teal); border-radius:var(--radius); padding:1rem 1.25rem; margin-bottom:1rem; }
+  .result h3 { margin:0 0 .25rem; } .result .where { font-size:.8rem; color:var(--ink-soft); margin:0 0 .35rem; }
+  .big-search { display:flex; gap:.5rem; max-width:560px; margin:1rem 0 2rem; } .big-search input { flex:1; padding:.7rem 1rem; font-size:1rem; border:1px solid var(--line); border-radius:var(--radius); }
+</style>
+</head>
+<body>
+
+<div class="gov-bar">
+  <div class="container">
+    <span>Official Website of the Camiling Water District</span>
+    <nav aria-label="Government links">
+      <a href="transparency.html#seal">Philippine Transparency Seal</a>
+      <a href="transparency.html#charter">Citizen's Charter</a>
+      <a href="transparency.html#foi">FOI</a>
+      <form class="site-search" action="search.html" method="get" role="search">
+        <label for="site-q" class="sr-only">Search the site</label>
+        <input type="search" id="site-q" name="q" placeholder="Search the site" autocomplete="off">
+        <button type="submit">Search</button>
+      </form>
+    </nav>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="assets/cwd-logo.png" alt="Camiling Water District" class="brand-logo">
+      <span class="brand-text"><strong>Camiling Water District</strong><em>Alagang Tubig, Alagang Pamilya</em><span>Luna St. Camiling, Tarlac</span></span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav">Menu</button>
+    <nav class="main-nav" id="main-nav" aria-label="Primary">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li class="nav-dropdown">
+          <a href="about.html">About Us</a>
+          <ul class="dropdown-menu">
+            <li><a href="about.html">About CWD</a></li>
+            <li><a href="about.html#mission-vision">Mission/Vision</a></li>
+            <li><a href="about.html#leadership">Organizational Chart/Leadership</a></li>
+            <li><a href="about.html#jva">Joint Venture with PrimeWater</a></li>
+          </ul>
+        </li>
+        <li class="nav-dropdown">
+          <a href="services.html">Services</a>
+          <ul class="dropdown-menu">
+            <li><a href="services.html#new-connection">New Service Connection</a></li>
+            <li><a href="services.html#other-services">Other Services</a></li>
+            <li><a href="services.html#requirements">Requirements Checklist</a></li>
+            <li><a href="services.html#projects-section">Projects</a></li>
+          </ul>
+        </li>
+        <li><a href="payments.html">Payments</a></li>
+        <li class="nav-dropdown">
+          <a href="rates.html">Rates &amp; Fees</a>
+          <ul class="dropdown-menu">
+            <li><a href="rates.html#bill-estimator">Bill Estimator</a></li>
+            <li><a href="rates.html#rate-schedule">Rate Schedule</a></li>
+          </ul>
+        </li>
+        <li class="nav-dropdown">
+          <a href="careers.html">Careers</a>
+          <ul class="dropdown-menu">
+            <li><a href="careers.html#openings">Job Openings/Postings</a></li>
+            <li><a href="careers.html#how-to-apply">How to Apply</a></li>
+            <li><a href="careers.html#qualifications">General Qualification Standards</a></li>
+          </ul>
+        </li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="content">
+  <section>
+    <div class="container" style="max-width:800px;">
+      <h1>Search</h1>
+      <form class="big-search" action="search.html" method="get" role="search">
+        <label for="big-q" class="sr-only">Search the site</label>
+        <input type="search" id="big-q" name="q" placeholder="Try: new connection, GCash, leak, job" autocomplete="off">
+        <button type="submit" class="btn btn-primary">Search</button>
+      </form>
+      <p id="status" aria-live="polite" style="color:var(--ink-soft);"></p>
+      <div id="results"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div><h4>Camiling Water District</h4><p class="footer-tagline">Every Drop, For Every Camiling Family&#39;s Health. — Serving Camiling, Tarlac since 1976.</p></div>
+      <div><h4>Quick Links</h4><ul><li><a href="services.html">Services</a></li><li><a href="payments.html">Payments</a></li><li><a href="faq.html">FAQ</a></li>
+        <li><a href="contact.html">Contact</a></li></ul></div>
+      <div><h4>Transparency</h4><ul><li><a href="transparency.html#seal">Philippine Transparency Seal</a></li><li><a href="transparency.html#charter">Citizen's Charter</a></li><li><a href="transparency.html#foi">Freedom of Information</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li>Luna St., Camiling, Tarlac</li><li>(04593) 40304</li><li>Camilingwaterdistrict@gmail.com</li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Camiling Water District. All rights reserved.</span>
+      <span>A GOCC chartered under PD No. 198.</span>
+      <span>Website developed by: Denys Bryante B. Reed</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/script.js"></script>
+<script>
+(function () {
+  var PAGES = [
+    ["Home","index.html","Camiling Water District official website pay bill new service connection rates news"],
+    ["About CWD","about.html","about history charter PD 198 1976 GOCC board of directors"],
+    ["Mission and Vision","about.html#mission-vision","mission vision"],
+    ["Leadership and Board of Directors","about.html#leadership","leadership board of directors management organizational chart general manager"],
+    ["Joint Venture with PrimeWater","about.html#jva","joint venture PrimeWater Hiraya Water public-private partnership"],
+    ["Service Area","about.html","barangays served service area Camiling Tarlac"],
+    ["Services","services.html","services new connection reconnection transfer requirements"],
+    ["New Service Connection","services.html#new-connection","new service connection apply application requirements"],
+    ["Requirements Checklist","services.html#requirements","requirements checklist valid ID proof of property reconnection transfer"],
+    ["Payments","payments.html","pay bill payment channels GCash Maya Link.BizPortal Coins.ph AllBank Bayad Center 7-Eleven Palawan Pawnshop AllEasy PrimeWater app walk-in"],
+    ["Rates and Fees","rates.html","rates fees water rate schedule bill estimator"],
+    ["Careers","careers.html","careers jobs openings how to apply qualification standards hiring"],
+    ["News and Announcements","news.html","news announcements advisories"],
+    ["FAQ","faq.html","frequently asked questions"],
+    ["Contact Us","contact.html","contact address hotline email office hours report leak message"],
+    ["Transparency","transparency.html","transparency documents"],
+    ["Philippine Transparency Seal","transparency.html#seal","philippine transparency seal Section 93 GAA NBC 542"],
+    ["Citizen's Charter","transparency.html#charter","citizen's charter frontline services"],
+    ["Freedom of Information (FOI)","transparency.html#foi","freedom of information FOI eFOI request"]
+  ];
+  var docs = PAGES.map(function (p) { return { title: p[0], url: p[1], where: "Page", text: p[2] }; });
+  function get(u) { return fetch(u).then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; }); }
+  function join() { return Array.prototype.slice.call(arguments).filter(Boolean).join(" "); }
+  var q = (new URLSearchParams(location.search).get("q") || "").trim();
+  document.getElementById("big-q").value = q;
+  var status = document.getElementById("status"), out = document.getElementById("results");
+  if (!q) { status.textContent = "Type a word above to search the website."; return; }
+  Promise.all(["news","services","faq","careers","projects","transparency","rates"].map(function (n) { return get("data/" + n + ".json"); })).then(function (r) {
+    (r[0].items || []).forEach(function (i) { docs.push({ title: i.title, url: "news.html", where: "News", text: join(i.body) }); });
+    (r[1].items || []).forEach(function (i) { docs.push({ title: i.name, url: "services.html#other-services", where: "Service", text: join(i.description, i.requirements) }); });
+    (r[2].items || []).forEach(function (i) { docs.push({ title: i.question, url: "faq.html", where: "FAQ", text: join(i.answer) }); });
+    (r[3].items || []).forEach(function (i) { docs.push({ title: i.title, url: "careers.html#openings", where: "Careers", text: join(i.description, i.status) }); });
+    (r[4].items || []).forEach(function (i) { docs.push({ title: i.title, url: "services.html#projects-section", where: "Project", text: join(i.description, i.location, i.status) }); });
+    (r[5].items || []).forEach(function (i) { docs.push({ title: i.title, url: "transparency.html", where: "Transparency", text: join(i.category, i.year) }); });
+    (r[6].fees || []).forEach(function (i) { docs.push({ title: i.name, url: "rates.html#rate-schedule", where: "Rates and Fees", text: "" }); });
+    var terms = q.toLowerCase().split(/\s+/).filter(Boolean);
+    var hits = docs.map(function (d) {
+      var t = (d.title || "").toLowerCase(), x = (d.text || "").toLowerCase(), s = 0;
+      terms.forEach(function (w) { if (t.indexOf(w) > -1) s += 5; if (x.indexOf(w) > -1) s += 1; });
+      return { d: d, s: s };
+    }).filter(function (h) { return h.s > 0; }).sort(function (a, b) { return b.s - a.s; }).slice(0, 20);
+    if (!hits.length) { status.textContent = "No results for \u201c" + q + "\u201d. Try a different word, or contact us."; return; }
+    status.textContent = hits.length + " result" + (hits.length > 1 ? "s" : "") + " for \u201c" + q + "\u201d";
+    hits.forEach(function (h) {
+      var box = document.createElement("div"); box.className = "result";
+      var w = document.createElement("p"); w.className = "where"; w.textContent = h.d.where; box.appendChild(w);
+      var h3 = document.createElement("h3"), a = document.createElement("a"); a.href = h.d.url; a.textContent = h.d.title || "Untitled"; h3.appendChild(a); box.appendChild(h3);
+      if (h.d.text) { var p = document.createElement("p"); p.textContent = h.d.text.length > 160 ? h.d.text.slice(0, 160) + "\u2026" : h.d.text; box.appendChild(p); }
+      out.appendChild(box);
+    });
+  });
+}());
+</script>
+</body>
+</html>

@@ -761,3 +761,12 @@ input, textarea, select {
 
 /* Anchor links land below the sticky header */
 section[id] { scroll-margin-top: 96px; }
+
+/* ---------- Site search + utilities ---------- */
+.sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+.gov-bar nav { display:flex; flex-wrap:wrap; align-items:center; gap:0.25rem 1rem; }
+.site-search { display:inline-flex; gap:0.35rem; align-items:center; }
+.site-search input { padding:0.25rem 0.6rem; border-radius:6px; border:1px solid rgba(255,255,255,0.45); background:rgba(255,255,255,0.12); color:#fff; font-size:0.85rem; width:150px; }
+.site-search input::placeholder { color:rgba(255,255,255,0.78); }
+.site-search input:focus-visible { outline:2px solid var(--gold); outline-offset:1px; }
+.site-search button { padding:0.25rem 0.7rem; border-radius:6px; border:0; background:var(--gold); color:var(--teal-deep); font-weight:700; font-size:0.85rem; cursor:pointer; }

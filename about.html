@@ -14,7 +14,6 @@
   <div class="container">
     <span>Official Website of the Camiling Water District</span>
     <nav aria-label="Government links">
-      <a href="transparency.html#seal" class="ts-seal-link"><img src="assets/transparency-seal.png" alt="" class="ts-seal-img" aria-hidden="true">Transparency Seal</a>
       <a href="transparency.html#charter">Citizen's Charter</a>
       <a href="transparency.html#foi">FOI</a>
     </nav>
@@ -33,10 +32,11 @@
         <li><a href="index.html">Home</a></li>
         <li class="nav-dropdown">
           <a href="about.html">About Us</a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="about.html" role="menuitem">About CWD</a></li>
-            <li><hr></li>
-            <li><a href="about.html#jva" class="dropdown-sub-item" role="menuitem">Joint Venture — PrimeWater</a></li>
+          <ul class="dropdown-menu">
+            <li><a href="about.html">About CWD</a></li>
+            <li><a href="about.html#mission-vision">Mission/Vision</a></li>
+            <li><a href="about.html#leadership">Organizational Chart/Leadership</a></li>
+            <li><a href="about.html#jva">Joint Venture with PrimeWater</a></li>
           </ul>
         </li>
         <li><a href="services.html">Services</a></li>
@@ -60,7 +60,7 @@
     </div>
   </section>
 
-  <section class="section-tint">
+  <section class="section-tint" id="mission-vision">
     <div class="container grid" style="grid-template-columns: 1fr 1fr; align-items:start;">
       <div class="card">
         <h3>Mission</h3>
@@ -73,7 +73,7 @@
     </div>
   </section>
 
-  <section>
+  <section id="leadership">
     <div class="container">
       <div class="section-head">
         <h2>Leadership</h2>
@@ -129,3 +129,48 @@
 
 
 </main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div><h4>Camiling Water District</h4><p class="footer-tagline">Every Drop, For Every Camiling Family&#39;s Health. — Serving Camiling, Tarlac since 1976.</p></div>
+      <div><h4>Quick Links</h4><ul><li><a href="services.html">Services</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><h4>Transparency</h4><ul><li><a href="transparency.html#charter">Citizen's Charter</a></li><li><a href="transparency.html#foi">Freedom of Information</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li>Luna St., Camiling, Tarlac</li><li>(04593) 40304</li><li>Camilingwaterdistrict@gmail.com</li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Camiling Water District. All rights reserved.</span>
+      <span>A GOCC chartered under PD No. 198.</span>
+      <span>Website developed by: Denys Bryante B. Reed</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/script.js"></script>
+<script>
+(function () {
+  function person(p, sub) {
+    var c = document.createElement("div"); c.className = "card";
+    if (p.photo) { var i = document.createElement("img"); i.src = p.photo; i.alt = p.name || ""; i.style.cssText = "width:100%;max-height:220px;object-fit:cover;border-radius:var(--radius);margin-bottom:1rem;"; c.appendChild(i); }
+    var h = document.createElement("h3"); h.textContent = p.name || ""; c.appendChild(h);
+    var t = document.createElement("p"); t.textContent = sub; c.appendChild(t);
+    return c;
+  }
+  fetch("data/about.json").then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (d) {
+    document.getElementById("board-loading").hidden = true;
+    var bl = document.getElementById("board-list");
+    (d.board || []).forEach(function (p) { bl.appendChild(person(p, p.position || "")); });
+    var m = d.management || [];
+    if (m.length) {
+      var ml = document.getElementById("management-list");
+      m.forEach(function (p) { ml.appendChild(person(p, [p.title, p.office].filter(Boolean).join(", "))); });
+      document.getElementById("management-section").hidden = false;
+    }
+  }).catch(function () {
+    document.getElementById("board-loading").hidden = true;
+    document.getElementById("board-error").hidden = false;
+  });
+}());
+</script>
+</body>
+</html>

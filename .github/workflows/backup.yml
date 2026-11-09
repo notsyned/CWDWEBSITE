@@ -1,0 +1,29 @@
+name: Monthly backup
+
+on:
+  schedule:
+    - cron: '0 2 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create backup zip
+        run: |
+          STAMP=$(date +%Y-%m-%d-%H%M)
+          echo "STAMP=$STAMP" >> $GITHUB_ENV
+          zip -r "/tmp/cwd-website-backup-$STAMP.zip" . -x ".git/*"
+
+      - name: Save it as a release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "backup-$STAMP" "/tmp/cwd-website-backup-$STAMP.zip" \
+            --title "Backup $STAMP" \
+            --notes "Automatic monthly backup of the CWD website."

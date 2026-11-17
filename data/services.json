@@ -37,6 +37,15 @@
           "file": "documents/CWD-List of Fire Hydrants.pdf"
         }
       ]
+    },
+    {
+      "name": "List of Pumping Stations",
+      "description": "The document below lists all of the pumping stations served by Camiling Water District",
+      "attachments": [
+        {
+          "file": "documents/CWD - List of Pumping Stations Served by Camiling Water District.pdf"
+        }
+      ]
     }
   ]
 }

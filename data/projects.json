@@ -6,6 +6,55 @@
       "location": "Camiling, Tarlac",
       "updated": "2026-11-17",
       "description": "The project involves the rehabilitation of six (6) deepwell facilities to help maintain their functionality and support the continuous delivery of water services to the community. Rehabilitation works are currently ongoing."
+    },
+    {
+      "title": "New Source Development in Brgy. Telbang ",
+      "status": "Ongoing",
+      "location": "Brgy. Telbang, Camiling, Tarlac",
+      "updated": "2026-11-17",
+      "description": "The project involves the development of a new water source in Brgy. Telbang to help improve water supply capacity and support the reliable delivery of water services to the community. Development works are currently ongoing."
+    },
+    {
+      "title": "New Source Development in Brgy. Anoling ",
+      "status": "Ongoing",
+      "location": "Brgy. Anoling",
+      "updated": "2026-11-17",
+      "description": "The project involves the development of a new water source in Brgy. Anoling to help increase water supply capacity and improve the reliability of water services for the community. Development works are currently ongoing."
+    },
+    {
+      "title": "Pipelaying of 150mm x 3.4km Distribution Lines at Brgy. Matubog to Nagserialan",
+      "status": "Ongoing",
+      "location": "Brgy. Matubog and Brgy Nagserialan, Camiling, Tarlac",
+      "updated": "2026-11-17",
+      "description": "The project involves the installation of approximately 3.4 kilometers of 150 mm distribution pipelines from Brgy. Matubog to Nagserialan to improve water distribution and support more reliable water services in the area. Project implementation is currently in progress."
+    },
+    {
+      "title": "Purchase of New Generator Sets and Repair and Maintenance of Generator Set",
+      "status": "Ongoing",
+      "location": "Camilig, Tarlac",
+      "updated": "2026-11-17",
+      "description": "The project involves the procurement of new generator sets and the repair and maintenance of existing units to help ensure reliable backup power for water district operations. These activities are currently ongoing to support operational continuity, particularly during power interruptions."
+    },
+    {
+      "title": "Purchase and Repair of Pump and Motor for Spare",
+      "status": "Ongoing",
+      "location": "Camiling, Tarlac",
+      "updated": "2026-11-17",
+      "description": "The project involves the procurement and repair of pumps and motors to maintain an adequate supply of spare equipment for water district operations. These activities aim to ensure operational readiness and minimize service disruptions. Implementation is currently ongoing."
+    },
+    {
+      "title": "Repair and Maintenance of Motor Control Panels",
+      "status": "Ongoing",
+      "location": "Camiling, Tarlac",
+      "updated": "2026-11-17",
+      "description": "Repair and Maintenance of Motor Control Panels"
+    },
+    {
+      "title": "Pipeline Extension in Purok Talna(Camartinizan) Turod in Brgy. Malacampa",
+      "status": "Completed",
+      "location": "Purok Talna(Camartinizan) Turod in Brgy. Malacampa, Camiling, Tarlac",
+      "updated": "2026-11-17",
+      "description": "The project involved the extension of water distribution pipelines in Purok Talna (Camartinizan), Turod, Brgy. Malacampa, to expand water service coverage and improve access to water for local residents. The pipeline extension has been successfully completed."
     }
   ]
 }

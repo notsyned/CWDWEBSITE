@@ -299,3 +299,38 @@ content:
             type: image
             options:
               media: images
+
+  - name: payments
+    label: Payments
+    type: file
+    path: data/payments.json
+    format: json
+    fields:
+      - name: title
+        label: Page heading
+        type: string
+      - name: intro
+        label: Introduction
+        type: text
+      - name: items
+        label: Payment channels
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Payment method
+            type: string
+          - name: description
+            label: Instructions
+            type: text
+          - name: icon
+            label: Icon style
+            type: select
+            options:
+              values: [mobile, online, bank, store, office]
+      - name: notice_title
+        label: Reminder heading
+        type: string
+      - name: notice_body
+        label: Reminder text
+        type: text

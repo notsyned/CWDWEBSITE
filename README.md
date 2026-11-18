@@ -8,7 +8,7 @@ Official website of the Camiling Water District (CWD), Camiling, Tarlac.
 Content is edited through **Pages CMS** (app.pagescms.org). No coding is needed.
 Staff log in with the email they were invited with, open a section, edit, and click **Save**. Changes appear on the website in 1 to 3 minutes.
 
-Sections that can be edited: News, Careers, Transparency Documents, Rates and Fees, FAQ, Homepage Banner, Services, Projects, and About Us (Board and Management).
+Sections that can be edited: News, Careers, Transparency Documents, Rates and Fees, Payments, FAQ, Homepage Banner, Services, Projects, and About Us (Board and Management).
 
 ## What is in this repository
 - `*.html` — the website pages

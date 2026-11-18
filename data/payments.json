@@ -1,0 +1,63 @@
+{
+  "title": "Payment Channels",
+  "intro": "Pay your water bill through any of the channels below, or in person at the CWD office.",
+  "items": [
+    {
+      "name": "GCash",
+      "description": "Search \"Camiling Water District\" under Bills Pay in the GCash app.",
+      "icon": "mobile"
+    },
+    {
+      "name": "Maya",
+      "description": "Pay Bills > Government > Camiling Water District.",
+      "icon": "mobile"
+    },
+    {
+      "name": "Link.BizPortal",
+      "description": "Search CWD under Water Utilities.",
+      "icon": "online"
+    },
+    {
+      "name": "Coins.ph",
+      "description": "Bills > Water > Camiling Water District.",
+      "icon": "mobile"
+    },
+    {
+      "name": "AllBank",
+      "description": "Over-the-counter bills payment at any AllBank branch.",
+      "icon": "bank"
+    },
+    {
+      "name": "Bayad Center",
+      "description": "Present your account number at any Bayad Center outlet.",
+      "icon": "store"
+    },
+    {
+      "name": "7-Eleven",
+      "description": "Pay via CLiQQ kiosk or at the counter.",
+      "icon": "store"
+    },
+    {
+      "name": "Palawan Pawnshop",
+      "description": "Bills payment counter, any branch.",
+      "icon": "store"
+    },
+    {
+      "name": "AllEasy",
+      "description": "Bills payment app — search Camiling Water District.",
+      "icon": "mobile"
+    },
+    {
+      "name": "PrimeWater App",
+      "description": "Pay directly if your account is linked in the app.",
+      "icon": "mobile"
+    },
+    {
+      "name": "Walk-in",
+      "description": "Pay in person at the CWD office, cash or check.",
+      "icon": "office"
+    }
+  ],
+  "notice_title": "Before you pay:",
+  "notice_body": "Have your account number ready (found on your most recent billing statement). Keep your payment reference number until the payment reflects on your next bill."
+}

@@ -11,7 +11,7 @@
 <meta property="og:title" content="Payments — Camiling Water District">
 <meta property="og:description" content="Ways to pay your Camiling Water District bill: GCash, Maya, Bayad Center, 7-Eleven, and more.">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css">
+<link rel="stylesheet" href="assets/styles.css?v=water-20261118-payments">
 </head>
 <body class="bg-splash">
 
@@ -88,14 +88,14 @@
   <section class="payments-hero">
     <div class="payments-hero-overlay"></div>
     <div class="container payments-hero-content">
-      <h1>Payment Channels</h1>
-      <p style="max-width:60ch;">Pay your water bill through any of the channels below, or in person at the CWD office.</p>
+      <h1 id="payment-title">Payment Channels</h1>
+      <p id="payment-intro" style="max-width:60ch;">Pay your water bill through any of the channels below, or in person at the CWD office.</p>
     </div>
   </section>
 
   <section class="section-tint">
     <div class="container">
-      <div class="grid">
+      <div class="grid" id="payment-channels">
         <div class="card"><div class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div><h3>GCash</h3><p>Search "Camiling Water District" under Bills Pay in the GCash app.</p></div>
         <div class="card"><div class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div><h3>Maya</h3><p>Pay Bills &gt; Government &gt; Camiling Water District.</p></div>
         <div class="card"><div class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg></div><h3>Link.BizPortal</h3><p>Search CWD under Water Utilities.</p></div>
@@ -114,7 +114,7 @@
   <section>
     <div class="container">
       <div class="notice">
-        <strong>Before you pay:</strong> have your account number ready (found on your most recent billing statement). Keep your payment reference number until the payment reflects on your next bill.
+        <strong id="payment-notice-title">Before you pay:</strong> <span id="payment-notice-body">Have your account number ready (found on your most recent billing statement). Keep your payment reference number until the payment reflects on your next bill.</span>
       </div>
     </div>
   </section>
@@ -137,6 +137,78 @@
     </div>
   </div>
 </footer>
+
+
+<script>
+(function () {
+  var channels = document.getElementById("payment-channels");
+  if (!channels) return;
+
+  // These SVG snippets are fixed in the page code; CMS content is inserted as text.
+  var iconMarkup = {
+    mobile: '<rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/>',
+    online: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M8 14h4"/>',
+    bank: '<path d="M3 21h18"/><path d="M5 21V10M9 21V10M15 21V10M19 21V10"/><path d="M3 10l9-6 9 6"/>',
+    store: '<path d="M3 9l1-5h16l1 5"/><path d="M4 9v11h16V9"/><path d="M9 20v-6h6v6"/>',
+    office: '<path d="M4 21V5l8-3 8 3v16"/><path d="M2 21h20"/><path d="M8 8h1M15 8h1M8 12h1M15 12h1M10 21v-5h4v5"/>'
+  };
+
+  function setText(id, value) {
+    var node = document.getElementById(id);
+    if (node && typeof value === "string" && value.trim()) node.textContent = value;
+  }
+
+  function makeCard(item) {
+    var card = document.createElement("div");
+    card.className = "card";
+
+    var icon = document.createElement("div");
+    icon.className = "card-icon";
+    icon.setAttribute("aria-hidden", "true");
+
+    var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.setAttribute("focusable", "false");
+    svg.innerHTML = iconMarkup[item.icon] || iconMarkup.online;
+    icon.appendChild(svg);
+
+    var heading = document.createElement("h3");
+    heading.textContent = item.name || "Payment method";
+
+    var description = document.createElement("p");
+    description.textContent = item.description || "";
+
+    card.appendChild(icon);
+    card.appendChild(heading);
+    card.appendChild(description);
+    return card;
+  }
+
+  fetch("data/payments.json", { cache: "no-store" })
+    .then(function (response) {
+      if (!response.ok) throw new Error("Could not load payment content.");
+      return response.json();
+    })
+    .then(function (data) {
+      setText("payment-title", data.title);
+      setText("payment-intro", data.intro);
+      setText("payment-notice-title", data.notice_title);
+      setText("payment-notice-body", data.notice_body);
+
+      if (Array.isArray(data.items) && data.items.length) {
+        var fragment = document.createDocumentFragment();
+        data.items.forEach(function (item) {
+          if (item && typeof item === "object") fragment.appendChild(makeCard(item));
+        });
+        if (fragment.childNodes.length) channels.replaceChildren(fragment);
+      }
+    })
+    .catch(function (error) {
+      // Keep the existing HTML cards visible if the CMS data file is unavailable.
+      console.error("Payments CMS content could not be loaded; using page defaults.", error);
+    });
+})();
+</script>
 
 <script src="assets/script.js"></script>
 </body>

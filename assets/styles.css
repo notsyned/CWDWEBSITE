@@ -747,8 +747,8 @@ input, textarea, select {
 
 /* ---------- Home hero (text + photo) ---------- */
 .home-hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: var(--space-4); align-items: center; }
-.home-hero-photo { min-height: 380px; border-radius: 12px; border: 1px solid var(--line); box-shadow: 0 12px 32px rgba(7,63,82,0.18);
-  background: url("home-hero.jpg") center / cover no-repeat, linear-gradient(135deg, var(--teal-deep), var(--teal)); }
+.home-hero-photo { min-height: 380px; border-radius: 12px; border: 1px solid var(--line); box-shadow: 0 12px 32px rgba(7,63,82,0.18); overflow: hidden;
+  background: url("home-hero-placeholder.webp") center / cover no-repeat, linear-gradient(135deg, var(--teal-deep), var(--teal)); }
 @media (max-width: 860px) { .home-hero-grid { grid-template-columns: 1fr; } .home-hero-photo { min-height: 220px; order: -1; } }
 
 /* ---------- News hero banner ---------- */

@@ -159,3 +159,62 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+/* CMS content-only bindings: editable copy and imagery, fixed presentation. */
+document.addEventListener("DOMContentLoaded", function () {
+  function put(selector, value) {
+    var el = document.querySelector(selector);
+    if (!el || value === undefined || value === null) return;
+    if (el.matches("input, textarea")) el.placeholder = String(value);
+    else el.textContent = String(value);
+  }
+  function make(tag, cls, value) {
+    var el = document.createElement(tag);
+    if (cls) el.className = cls;
+    if (value !== undefined) el.textContent = String(value);
+    return el;
+  }
+  function fillList(selector, items, builder) {
+    var el = document.querySelector(selector);
+    if (!el || !Array.isArray(items)) return;
+    var frag = document.createDocumentFragment();
+    items.forEach(function(item, i){ frag.appendChild(builder(item, i)); });
+    el.replaceChildren(frag);
+  }
+  var page = location.pathname.split("/").pop() || "index.html";
+  fetch("data/page-content.json", {cache:"no-store"}).then(function(r){
+    if(!r.ok) throw new Error("CMS page content unavailable");
+    return r.json();
+  }).then(function(d){
+    var maps = {
+      "index.html":[[".home-hero-eyebrow",d.home.eyebrow],[".home-hero-title",d.home.title],[".home-hero-lead",d.home.lead],[".home-hero-tagline",d.home.tagline],[".home-hero-actions .btn-primary",d.home.primary_button],[".home-hero-actions .btn-outline",d.home.secondary_button],[".home-stats-grid .home-stat:nth-child(1) h2",d.home.stats[0].value],[".home-stats-grid .home-stat:nth-child(1) p",d.home.stats[0].label],[".home-stats-grid .home-stat:nth-child(2) h2",d.home.stats[1].value],[".home-stats-grid .home-stat:nth-child(2) p",d.home.stats[1].label],[".home-stats-grid .home-stat:nth-child(3) h2",d.home.stats[2].value],[".home-stats-grid .home-stat:nth-child(3) p",d.home.stats[2].label],["main > section:nth-of-type(3) .section-head h2",d.home.shortcuts_heading],["main > section:nth-of-type(3) .section-head p",d.home.shortcuts_intro],["main > section:nth-of-type(4) .section-head h2",d.home.news_heading],["main > section:nth-of-type(4) .section-head p",d.home.news_intro]],
+      "about.html":[["main > section:first-child h1",d.about.title],["main > section:first-child p",d.about.intro],["#mission-vision .card:nth-child(1) h3",d.about.mission_heading],["#mission-vision .card:nth-child(1) p",d.about.mission_body],["#mission-vision .card:nth-child(2) h3",d.about.vision_heading],["#mission-vision .card:nth-child(2) p",d.about.vision_body],["#leadership .section-head h2",d.about.leadership_heading],["#leadership .section-head p",d.about.leadership_intro],["#jva .section-head h2",d.about.partnership_heading],["#jva .section-head p",d.about.partnership_intro],["#jva .card h3",d.about.jva_heading],["#jva .card p:nth-of-type(1)",d.about.jva_paragraph_1],["#jva .card p:nth-of-type(2)",d.about.jva_paragraph_2],["main > section:nth-of-type(5) .section-head h2",d.about.service_area_heading],["main > section:nth-of-type(5) .section-head p",d.about.service_area_intro],["main > section:nth-of-type(5) details summary",d.about.service_area_summary]],
+      "services.html":[[".services-hero h1",d.services.title],[".services-hero p",d.services.intro],["#new-connection .section-head h2",d.services.connection_heading],["#new-connection .section-head p",d.services.connection_intro],["#other-services .section-head h2",d.services.other_services_heading],["#requirements h2",d.services.requirements_heading],["#projects-heading",d.services.projects_heading],["#projects-section .section-head p",d.services.projects_intro]],
+      "payments.html":[[".payments-hero h1",d.payments.title],[".payments-hero p",d.payments.intro],["#payment-notice-title",d.payments.notice_title],["#payment-notice-body",d.payments.notice_body]],
+      "rates.html":[[".rates-hero h1",d.rates.title],[".rates-hero p",d.rates.intro],["#bill-estimator h3",d.rates.estimator_heading],["#bill-estimator .card > p",d.rates.estimator_intro],["label[for=consumption]",d.rates.consumption_label],["#estimate-btn",d.rates.estimate_button],["#bill-estimator .notice",d.rates.rate_notice],["#rate-schedule h2",d.rates.rate_schedule_heading]],
+      "careers.html":[[".careers-hero h1",d.careers.title],[".careers-hero p",d.careers.intro],["#openings .section-head h2",d.careers.openings_heading],["#how-to-apply .section-head h2",d.careers.apply_heading],["#qualifications h2",d.careers.qualifications_heading],["#qualifications p",d.careers.qualifications_intro]],
+      "news.html":[[".news-hero h1",d.news.title],[".news-hero p",d.news.intro]],
+      "faq.html":[["main > section:first-child h1",d.faq.title],["main > section:first-child p",d.faq.intro]],
+      "contact.html":[[".contact-hero h1",d.contact.title],[".contact-hero p",d.contact.intro],[".contact-hero + section .container > div:first-child h2",d.contact.office_heading],[".contact-hero + section .card h3",d.contact.form_heading],["#form-success h4",d.contact.success_heading],["#form-success p",d.contact.success_message],["#form-error",d.contact.error_message],["label[for=fullname]",d.contact.name_label],["label[for=email]",d.contact.email_field_label],["label[for=subject]",d.contact.subject_label],["label[for=message]",d.contact.message_label],["#consent + label",d.contact.consent_text],["#btn-label",d.contact.send_button],["#btn-sending",d.contact.sending_button]],
+      "transparency.html":[["main > section:first-child h1",d.transparency.title],["main > section:first-child p",d.transparency.intro],["#seal h2",d.transparency.seal_heading],["#seal h3",d.transparency.documents_heading],["#charter h2",d.transparency.charter_heading],["#charter p:nth-of-type(1)",d.transparency.charter_intro],["#foi h2",d.transparency.foi_heading],["#foi p",d.transparency.foi_intro],["#foi .btn-primary",d.transparency.foi_button],["#foi .btn-outline",d.transparency.foi_contact_button]],
+      "search.html":[["main h1",d.search.title],["#big-q",d.search.placeholder]]
+    };
+    (maps[page] || []).forEach(function(pair){ put(pair[0],pair[1]); });
+    if(page==="index.html"){
+      var hero=document.querySelector(".home-hero-photo");
+      if(hero && d.home.hero_image) hero.style.backgroundImage="linear-gradient(180deg,rgba(7,63,82,.02),rgba(7,63,82,.12)),url('"+d.home.hero_image.replace(/'/g,"%27")+"')";
+      fillList("main > section:nth-of-type(3) .grid",d.home.shortcuts,function(item){
+        var card=make("article","card");
+        if(item.image){var im=make("img","home-shortcut-img");im.src=item.image;im.alt=item.image_alt||item.title;im.loading="lazy";card.appendChild(im);}
+        card.appendChild(make("h3","",item.title));card.appendChild(make("p","",item.description));
+        var p=make("p");var a=make("a","",item.button);a.href=item.target||"#";p.appendChild(a);card.appendChild(p);return card;
+      });
+    }
+    if(page==="about.html") fillList("main > section:nth-of-type(5) details .grid",d.about.barangays,function(name){return make("p","",name);});
+    var site=d.site;
+    put(".gov-bar .container > span",site.gov_bar_text);
+    put(".site-footer .footer-tagline",site.footer_tagline);
+    var foot=document.querySelector(".site-footer");
+    if(foot){var li=foot.querySelectorAll(".footer-grid > div:last-child li");if(li[0])li[0].textContent=site.footer_address;if(li[1])li[1].textContent=site.footer_phone;if(li[2])li[2].textContent=site.footer_email;var c=foot.querySelector(".footer-bottom span");if(c)c.textContent=site.footer_copyright;}
+  }).catch(function(){ /* Static HTML remains a safe fallback. */ });
+});

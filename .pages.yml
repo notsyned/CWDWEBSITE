@@ -194,6 +194,11 @@ content:
           - name: description
             label: Description
             type: text
+          - name: image
+            label: Optional service photo
+            type: image
+            options:
+              media: images
           - name: requirements
             label: Requirements (optional)
             type: text
@@ -237,10 +242,23 @@ content:
             label: Last updated
             type: date
           - name: image
-            label: Photo
+            label: Cover photo
             type: image
             options:
               media: images
+          - name: gallery
+            label: Additional project photos
+            type: object
+            list: true
+            fields:
+              - name: image
+                label: Photo
+                type: image
+                options:
+                  media: images
+              - name: caption
+                label: Caption
+                type: string
           - name: description
             label: Description
             type: text
@@ -323,6 +341,11 @@ content:
           - name: description
             label: Instructions
             type: text
+          - name: image
+            label: Optional payment illustration
+            type: image
+            options:
+              media: images
           - name: icon
             label: Icon style
             type: select

@@ -218,3 +218,43 @@ document.addEventListener("DOMContentLoaded", function () {
     if(foot){var li=foot.querySelectorAll(".footer-grid > div:last-child li");if(li[0])li[0].textContent=site.footer_address;if(li[1])li[1].textContent=site.footer_phone;if(li[2])li[2].textContent=site.footer_email;var c=foot.querySelector(".footer-bottom span");if(c)c.textContent=site.footer_copyright;}
   }).catch(function(){ /* Static HTML remains a safe fallback. */ });
 });
+
+/* Project photo galleries: CMS photos are rendered inside fixed card layouts. */
+document.addEventListener("DOMContentLoaded", function () {
+  var list = document.getElementById("projects-list");
+  if (!list) return;
+  function attachGalleries(data) {
+    var items = data && Array.isArray(data.items) ? data.items : [];
+    list.querySelectorAll(".card").forEach(function (card) {
+      if (card.querySelector(".project-gallery")) return;
+      var titleEl = card.querySelector("h3");
+      if (!titleEl) return;
+      var project = items.find(function (item) { return item.title && item.title.trim() === titleEl.textContent.trim(); });
+      if (!project || !Array.isArray(project.gallery) || !project.gallery.length) return;
+      var gallery = document.createElement("div");
+      gallery.className = "project-gallery";
+      project.gallery.forEach(function (entry) {
+        if (!entry || !entry.image) return;
+        var figure = document.createElement("figure");
+        var img = document.createElement("img");
+        img.src = entry.image; img.alt = entry.caption || project.title; img.loading = "lazy";
+        figure.appendChild(img);
+        if (entry.caption) {
+          var caption = document.createElement("figcaption");
+          caption.textContent = entry.caption;
+          figure.appendChild(caption);
+        }
+        gallery.appendChild(figure);
+      });
+      var body = card.querySelector("div[style*='padding']") || card;
+      if (gallery.children.length) body.appendChild(gallery);
+    });
+  }
+  fetch("data/projects.json", {cache:"no-store"}).then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (data) {
+      if (!data) return;
+      attachGalleries(data);
+      var observer = new MutationObserver(function () { attachGalleries(data); });
+      observer.observe(list, {childList:true, subtree:true});
+    }).catch(function () {});
+});

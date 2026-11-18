@@ -723,14 +723,40 @@ input, textarea, select {
 .project-badge-completed { background: var(--success);  color: var(--white); }
 
 /* Project card photo */
+#projects-list {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+  align-items: stretch;
+  gap: 1.25rem;
+}
+
+#projects-list > .card {
+  box-sizing: border-box;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
 .project-img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-  border-radius: var(--radius) var(--radius) 0 0;
   display: block;
-  margin: calc(-1 * var(--space-3)) calc(-1 * var(--space-3)) var(--space-2);
-  width: calc(100% + 2 * var(--space-3));
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 0;
+  margin: 0;
+  flex: 0 0 auto;
+}
+
+#projects-list > .card > div {
+  box-sizing: border-box;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 
@@ -1117,3 +1143,34 @@ section[id] { scroll-margin-top: 96px; }
 .project-gallery figure { margin:0; min-width:0; }
 .project-gallery img { width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:8px; }
 .project-gallery figcaption { font-size:.8rem; color:var(--ink-soft); margin-top:.3rem; }
+
+
+/* Document actions: open PDFs in-browser or download them separately. */
+.document-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.85rem;
+}
+.document-actions .btn {
+  margin-top: 0 !important;
+  font-size: 0.84rem;
+  white-space: normal;
+}
+.attachment-item {
+  margin-bottom: 0.8rem;
+  overflow-wrap: anywhere;
+}
+.attachment-item .document-actions {
+  margin-top: 0.45rem;
+}
+@media (max-width: 480px) {
+  #projects-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .document-actions .btn {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+}

@@ -254,15 +254,26 @@
           h5.textContent = item.title;
           card.appendChild(h5);
 
-          // Download link
+          // Offer both an in-browser preview and a separate download.
           if (item.document) {
-            const a = document.createElement("a");
-            a.href = item.document;
-            a.textContent = "⬇ Download";
-            a.className = "btn btn-outline";
-            a.style.cssText = "margin-top:0.75rem; font-size:0.82rem;";
-            a.setAttribute("download", "");
-            card.appendChild(a);
+            const actions = document.createElement("div");
+            actions.className = "document-actions";
+            const view = document.createElement("a");
+            view.href = item.document;
+            view.target = "_blank";
+            view.rel = "noopener noreferrer";
+            view.textContent = "View document";
+            view.className = "btn btn-primary";
+            view.setAttribute("aria-label", "View " + item.title + " in a new tab");
+            const download = document.createElement("a");
+            download.href = item.document;
+            download.textContent = "Download PDF";
+            download.className = "btn btn-outline";
+            download.setAttribute("download", "");
+            download.setAttribute("aria-label", "Download " + item.title + " PDF");
+            actions.appendChild(view);
+            actions.appendChild(download);
+            card.appendChild(actions);
           } else {
             const pending = document.createElement("p");
             pending.style.cssText = "font-size:0.8rem; color:var(--ink-soft); margin-top:0.5rem;";

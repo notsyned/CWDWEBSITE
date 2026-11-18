@@ -800,12 +800,25 @@ section[id] { scroll-margin-top: 96px; }
 .bg-waves,
 .bg-drops,
 .bg-splash {
-  background-image: url("water-overlay.webp");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  background-attachment: fixed;
+  /* The water remains visible, but a pale veil keeps text readable. */
+  background-image:
+    linear-gradient(rgba(250, 253, 254, 0.56), rgba(250, 253, 254, 0.56)),
+    url("water-overlay.webp");
+  background-repeat: no-repeat, no-repeat;
+  background-position: center center, center center;
+  background-size: cover, cover;
+  background-attachment: fixed, fixed;
+  background-color: #f8fbfc;
 }
+.bg-waves main > section,
+.bg-drops main > section,
+.bg-splash main > section { background-color: rgba(255,255,255,0.18); }
+.bg-waves main > section.section-tint,
+.bg-drops main > section.section-tint,
+.bg-splash main > section.section-tint { background-color: rgba(239,247,249,0.9); }
+.bg-waves .card,
+.bg-drops .card,
+.bg-splash .card { background: rgba(255,255,255,0.97); }
 
 /* Keep tinted sections calm so the water stays decorative. */
 .bg-waves .section-tint,
@@ -820,8 +833,8 @@ section[id] { scroll-margin-top: 96px; }
   .bg-splash {
     background-position: center center;
     background-attachment: scroll;
-    background-size: auto 100vh;
-    background-repeat: repeat-y;
+    background-size: auto 100vh, auto 100vh;
+    background-repeat: repeat-y, repeat-y;
   }
 }
 
@@ -1097,3 +1110,10 @@ section[id] { scroll-margin-top: 96px; }
     transform: none;
   }
 }
+
+/* Staff-uploaded imagery changes content only; these presentation rules stay fixed. */
+.home-shortcut-img { width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:10px; margin-bottom:1rem; }
+.project-gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(110px,1fr)); gap:.65rem; margin-top:1rem; }
+.project-gallery figure { margin:0; min-width:0; }
+.project-gallery img { width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:8px; }
+.project-gallery figcaption { font-size:.8rem; color:var(--ink-soft); margin-top:.3rem; }

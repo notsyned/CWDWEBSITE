@@ -1,63 +1,43 @@
 {
   "title": "Payment Channels",
-  "intro": "Pay your water bill through any of the channels below, or in person at the CWD office.",
+  "intro": "Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.",
   "items": [
     {
       "name": "GCash",
-      "description": "Search \"Camiling Water District\" under Bills Pay in the GCash app.",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "icon": "mobile"
     },
     {
       "name": "Maya",
-      "description": "Pay Bills > Government > Camiling Water District.",
+      "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
       "icon": "mobile"
     },
     {
       "name": "Link.BizPortal",
-      "description": "Search CWD under Water Utilities.",
+      "description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. ",
       "icon": "online"
     },
     {
-      "name": "Coins.ph",
-      "description": "Bills > Water > Camiling Water District.",
-      "icon": "mobile"
-    },
-    {
-      "name": "AllBank",
-      "description": "Over-the-counter bills payment at any AllBank branch.",
-      "icon": "bank"
-    },
-    {
       "name": "Bayad Center",
-      "description": "Present your account number at any Bayad Center outlet.",
+      "description": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       "icon": "store"
     },
     {
       "name": "7-Eleven",
-      "description": "Pay via CLiQQ kiosk or at the counter.",
+      "description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo",
       "icon": "store"
     },
     {
       "name": "Palawan Pawnshop",
-      "description": "Bills payment counter, any branch.",
+      "description": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.",
       "icon": "store"
     },
     {
-      "name": "AllEasy",
-      "description": "Bills payment app — search Camiling Water District.",
-      "icon": "mobile"
-    },
-    {
-      "name": "PrimeWater App",
-      "description": "Pay directly if your account is linked in the app.",
-      "icon": "mobile"
-    },
-    {
       "name": "Walk-in",
-      "description": "Pay in person at the CWD office, cash or check.",
+      "description": "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.",
       "icon": "office"
     }
   ],
   "notice_title": "Before you pay:",
-  "notice_body": "Have your account number ready (found on your most recent billing statement). Keep your payment reference number until the payment reflects on your next bill."
+  "notice_body": "Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae."
 }

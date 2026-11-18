@@ -1,0 +1,343 @@
+{
+  "site": {
+    "gov_bar_text": "Official Website of the Camiling Water District",
+    "org_name": "Camiling Water District",
+    "org_slogan": "Alagang Tubig, Alagang Pamilya",
+    "org_location": "Luna St. Camiling, Tarlac",
+    "nav_home": "Home",
+    "nav_about": "About Us",
+    "nav_services": "Services",
+    "nav_payments": "Payments",
+    "nav_rates": "Rates & Fees",
+    "nav_careers": "Careers",
+    "nav_news": "News",
+    "nav_faq": "FAQ",
+    "nav_contact": "Contact",
+    "gov_transparency": "Philippine Transparency Seal",
+    "gov_charter": "Citizen's Charter",
+    "gov_foi": "FOI",
+    "footer_tagline": "Every Drop, For Every Camiling Family's Health. — Serving Camiling, Tarlac since 1976.",
+    "footer_address": "Luna St., Camiling, Tarlac",
+    "footer_phone": "(04593) 40304",
+    "footer_email": "Camilingwaterdistrict@gmail.com",
+    "footer_copyright": "© 2026 Camiling Water District. All rights reserved.",
+    "footer_legal": "A GOCC chartered under PD No. 198."
+  },
+  "home": {
+    "eyebrow": "CAMILING WATER DISTRICT / PUBLIC WATER SERVICE",
+    "title": "Bawat Patak para sa Kalusugan ng Pamilyang Camiling.",
+    "lead": "\"Every Drop, For Every Camiling Family's Health.\" CWD has delivered water service to the Municipality of Camiling since 1976.",
+    "tagline": "Malinis Ngayon, Ligtas Bukas. Buhay na Dulot ng Bawat Patak.",
+    "hero_image": "assets/home-hero-placeholder.webp",
+    "primary_button": "Pay Your Bill",
+    "secondary_button": "New Service Connection",
+    "stats": [
+      {
+        "value": "1976",
+        "label": "Chartered under PD No. 198"
+      },
+      {
+        "value": "59",
+        "label": "Barangays served across Camiling"
+      },
+      {
+        "value": "Public Service",
+        "label": "Serving Camiling, Tarlac"
+      }
+    ],
+    "shortcuts_heading": "What you can do here",
+    "shortcuts_intro": "Common tasks handled online, without a trip to the office.",
+    "shortcuts": [
+      {
+        "title": "Pay your water bill",
+        "description": "GCash, Maya, 7-Eleven, Bayad Center, and more.",
+        "button": "View payment channels",
+        "target": "payments.html",
+        "icon": "wallet",
+        "image": "",
+        "image_alt": ""
+      },
+      {
+        "title": "Apply for a new connection",
+        "description": "Requirements and steps for residential and commercial service.",
+        "button": "Start an application",
+        "target": "services.html",
+        "icon": "droplet",
+        "image": "",
+        "image_alt": ""
+      },
+      {
+        "title": "Check current rates",
+        "description": "Estimate your bill using the current approved rate schedule.",
+        "button": "Use the bill estimator",
+        "target": "rates.html",
+        "icon": "calculator",
+        "image": "",
+        "image_alt": ""
+      },
+      {
+        "title": "Report a concern",
+        "description": "Leaks, outages, or billing questions — reach our office directly.",
+        "button": "Contact us",
+        "target": "contact.html",
+        "icon": "message-circle",
+        "image": "",
+        "image_alt": ""
+      }
+    ],
+    "news_heading": "Latest News",
+    "news_intro": "Advisories, schedule changes, and district updates.",
+    "news_button": "See all announcements"
+  },
+  "about": {
+    "title": "About Camiling Water District",
+    "intro": "CWD is a government-owned and controlled corporation (GOCC) chartered under Presidential Decree No. 198, established on December 6, 1976, through Sangguniang Bayan Resolution No. 132, and became a full-fledged water district on July 27, 1977, with the issuance of Conditional Certificate of Conformance (CCC) No. 43 by the Local Water Utilities Administration (LWUA).",
+    "mission_heading": "Mission",
+    "mission_body": "Camiling Water District exists to provide safe, sufficient, and affordable potable water service to the households, businesses, and institutions of Camiling, Tarlac — delivered with transparency, accountability, and responsiveness to the communities we serve.",
+    "vision_heading": "Vision",
+    "vision_body": "To be a model government water utility in Central Luzon, recognized for dependable service, sound governance, and a modern, responsive relationship with every barangay under our care.",
+    "leadership_heading": "Organizational Chart & Leadership",
+    "leadership_intro": "CWD is governed by a Board of Directors and managed day-to-day by the General Manager.",
+    "board_heading": "Board of Directors",
+    "partnership_heading": "Public-Private Partnership",
+    "partnership_intro": "CWD operates in partnership with the private sector to improve service delivery while retaining full public ownership of the water system.",
+    "jva_heading": "Joint Venture with PrimeWater Infrastructure Corporation",
+    "jva_paragraph_1": "Camiling Water District (CWD) operates under a Joint Venture Agreement (JVA) with PrimeWater Infrastructure Corporation for the financing, development, rehabilitation, upgrading, expansion, operation, and maintenance of the district's potable water supply and septage management systems.",
+    "jva_paragraph_2": "This arrangement falls under the Philippine Public-Private Partnership (PPP) Program. Because water districts cannot, by law, be sold to private corporations, joint venture agreements such as this allow CWD to retain public ownership of the water system while drawing on private-sector capital and technical expertise to improve service delivery to Camiling residents.",
+    "jva_note_heading": "Note:",
+    "jva_note_body": "PrimeWater Infrastructure Corporation has begun rebranding as Hiraya Water Corporation, following SEC approval in 2025. Both names may appear in official and historical documentation during the transition.",
+    "service_area_heading": "Service Area",
+    "service_area_intro": "CWD serves 59 of the 61 barangays of the Municipality of Camiling, Tarlac.",
+    "service_area_summary": "View all 59 served barangays",
+    "barangays": [
+      "Ambabaay",
+      "Bacabac",
+      "Balawe",
+      "Balayang",
+      "Balite",
+      "Baltazar",
+      "Bantog",
+      "Baquero Norte",
+      "Baquero Sur",
+      "Bawa",
+      "Bilad",
+      "Bilbil",
+      "Birbira",
+      "Bogas",
+      "Botbotones",
+      "Buenavista",
+      "Bunker Hill",
+      "Burgos",
+      "Cabuluan",
+      "Camp Makabulos",
+      "Caniag",
+      "Caniag Kailian",
+      "Cinco-Cinco",
+      "Estacion",
+      "Esperanza",
+      "Fernandez",
+      "Ligtasin",
+      "Lomboy",
+      "Malacampa",
+      "Malayep",
+      "Mangley",
+      "Manupeg",
+      "Maragondong",
+      "Maasin",
+      "Nagsabaran",
+      "Nagserialan",
+      "Palimbo",
+      "Pandayan",
+      "Pao",
+      "Pindangan",
+      "Poblacion I",
+      "Poblacion II",
+      "Poblacion III",
+      "Pob. Zone IV",
+      "Rang-ayan",
+      "Ridge",
+      "Salapungan",
+      "Sawat",
+      "Sinilian 1st",
+      "Sinilian 2nd",
+      "Sinilian 3rd",
+      "Sinulatan 1st",
+      "Sinulatan 2nd",
+      "Suizo",
+      "Surgui 1st",
+      "Surgui 2nd",
+      "Tambugan",
+      "Telbang",
+      "Tuec"
+    ],
+    "service_area_note": "Barangays Bacsay and Papaac are not currently within the CWD service area, per the district engineer."
+  },
+  "services": {
+    "title": "Services",
+    "intro": "From a brand-new connection to reporting a leak, here's what CWD handles and what you'll need for each.",
+    "connection_heading": "New Service Connection",
+    "connection_intro": "Steps to apply for a new residential or commercial water connection.",
+    "connection_steps": [
+      {
+        "title": "Submit requirements",
+        "description": "Application form, valid ID, proof of property/lot ownership or authorization."
+      },
+      {
+        "title": "Site inspection",
+        "description": "CWD staff inspect the connection site and assess feasibility."
+      },
+      {
+        "title": "Pay connection fee",
+        "description": "Settle the applicable connection and meter installation fee."
+      },
+      {
+        "title": "Installation",
+        "description": "Meter installed and service activated, typically within [processing time — confirm]."
+      }
+    ],
+    "other_services_heading": "Other services",
+    "other_services_intro": "Browse the additional services offered by CWD.",
+    "requirements_heading": "Requirements checklist",
+    "requirements_columns": [
+      "Requirement",
+      "New Connection",
+      "Reconnection",
+      "Transfer"
+    ],
+    "requirements_rows": [
+      {
+        "requirement": "Valid government ID",
+        "new_connection": "Required",
+        "reconnection": "Required",
+        "transfer": "Required"
+      },
+      {
+        "requirement": "Proof of property/lot right",
+        "new_connection": "Required",
+        "reconnection": "—",
+        "transfer": "Required"
+      },
+      {
+        "requirement": "Settlement of past dues",
+        "new_connection": "—",
+        "reconnection": "Required",
+        "transfer": "—"
+      },
+      {
+        "requirement": "Accomplished application form",
+        "new_connection": "Required",
+        "reconnection": "Required",
+        "transfer": "Required"
+      }
+    ],
+    "application_button": "Start an application",
+    "projects_heading": "Projects",
+    "projects_intro": "Infrastructure and service improvement projects by CWD."
+  },
+  "rates": {
+    "title": "Rates & Fees",
+    "intro": "Current approved residential water rate schedule. Estimate your bill below, or view the full schedule further down the page.",
+    "estimator_heading": "Bill Estimator",
+    "estimator_intro": "Enter your estimated monthly water consumption to see an approximate charge (excludes penalties and other fees).",
+    "consumption_label": "Consumption (cubic meters)",
+    "consumption_placeholder": "e.g. 15",
+    "estimate_button": "Estimate my bill",
+    "rate_notice": "Rate figures shown here are placeholders pending confirmation with Finance — do not publish until the actual approved schedule is confirmed in data/rates.json.",
+    "rate_schedule_heading": "Rate Schedule",
+    "rate_schedule_column_item": "Item",
+    "rate_schedule_column_amount": "Amount",
+    "schedule_download_label": "Download the official rate schedule (PDF)"
+  },
+  "careers": {
+    "title": "Careers at CWD",
+    "intro": "CWD hires in accordance with Civil Service Commission (CSC) rules and merit-based selection. Current openings are posted below as they become available.",
+    "openings_heading": "Current Openings",
+    "apply_heading": "How to apply",
+    "application_steps": [
+      {
+        "title": "Check requirements",
+        "description": "Each posting lists its own qualification standards (education, experience, training, eligibility)."
+      },
+      {
+        "title": "Submit application",
+        "description": "Application letter, CSC Personal Data Sheet (Form 212), and supporting documents."
+      },
+      {
+        "title": "Initial screening",
+        "description": "HR reviews submissions against the qualification standards for the position."
+      },
+      {
+        "title": "Panel interview",
+        "description": "Shortlisted applicants are interviewed by the selection/promotion board."
+      }
+    ],
+    "qualifications_heading": "General qualification standards",
+    "qualifications_intro": "Specific requirements vary by position, but generally follow CSC qualification standards: relevant education, appropriate CSC or professional eligibility, and relevant work experience.",
+    "contact_hr_button": "Contact HR"
+  },
+  "news": {
+    "title": "News & Announcements",
+    "intro": "Service advisories, schedule changes, and district updates."
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "intro": "Answers to the questions we hear most from residents."
+  },
+  "contact": {
+    "title": "Contact Us",
+    "intro": "Have a question, a concern to report, or an application to follow up on? Reach us directly.",
+    "office_heading": "Office Information",
+    "address_label": "Address:",
+    "address": "Luna St., Camiling, Tarlac",
+    "phone_label": "Mobile hotline:",
+    "phone": "(04593) 40304",
+    "phone_href": "tel:+6304593403040",
+    "email_label": "Email:",
+    "email": "Camilingwaterdistrict@gmail.com",
+    "email_href": "mailto:Camilingwaterdistrict@gmail.com",
+    "office_hours_label": "Office hours:",
+    "office_hours": "Monday–Thursday, 8:00 AM – 5:00 PM",
+    "office_hours_note": "Compressed work week per CSC Resolution No. 2200209",
+    "form_heading": "Send a message",
+    "success_heading": "Message sent!",
+    "success_message": "We received your message and will get back to you within 1–3 business days. Thank you for reaching out.",
+    "error_message": "Something went wrong. Please try again, or email us directly at Camilingwaterdistrict@gmail.com.",
+    "name_label": "Full name",
+    "email_field_label": "Email address",
+    "subject_label": "Subject",
+    "subject_placeholder": "Select one",
+    "subject_options": [
+      "Billing question",
+      "Report a leak",
+      "New connection inquiry",
+      "Other"
+    ],
+    "message_label": "Message",
+    "consent_text": "I consent to CWD collecting and processing my personal information for the purpose of responding to this inquiry, in accordance with the Data Privacy Act of 2012 (RA 10173).",
+    "consent_error": "Consent is required to submit this form.",
+    "send_button": "Send message",
+    "sending_button": "Sending…"
+  },
+  "transparency": {
+    "title": "Transparency",
+    "intro": "CWD's transparency documents, required under Philippine government web standards.",
+    "seal_heading": "Transparency Seal",
+    "seal_paragraph_1": "In compliance with Section 93 of the General Appropriations Act and National Budget Circular No. 542, the Camiling Water District (CWD) publishes the following transparency documents on this website.",
+    "seal_paragraph_2": "The Transparency Seal is a certificate that CWD has complied with the requirements of Section 93 of the GAA, making government information accessible to every Filipino citizen it serves.",
+    "legal_basis": "Basis: RA 11032 (Ease of Doing Business Act) · EO 2 s. 2016 (FOI) · NBC 542 · Section 93, GAA",
+    "documents_heading": "Transparency Documents",
+    "charter_heading": "Citizen's Charter",
+    "charter_intro": "CWD's Citizen's Charter describes the step-by-step procedure, requirements, fees, and processing time for each frontline service, as required under the Ease of Doing Business Act (RA 11032).",
+    "charter_placeholder": "[Full Citizen's Charter document/download link — pending from HR/Admin.]",
+    "foi_heading": "Freedom of Information",
+    "foi_intro": "CWD supports public access to official records under Executive Order No. 2, s. 2016 (Freedom of Information). You can view and track FOI requests filed with Camiling Water District through the official eFOI portal.",
+    "foi_url": "https://www.foi.gov.ph/requests/?status=&category=&q=Camiling+Water+District",
+    "foi_button": "View FOI Requests on eFOI Portal ↗",
+    "foi_contact_button": "Submit a Request via Contact"
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "Try: new connection, GCash, leak, job",
+    "button": "Search"
+  }
+}

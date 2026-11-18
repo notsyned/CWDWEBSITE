@@ -334,3 +334,551 @@ content:
       - name: notice_body
         label: Reminder text
         type: text
+
+  - name: page_content
+    label: Page Content — Text, Labels and Images
+    type: file
+    path: data/page-content.json
+    format: json
+    fields:
+      - name: site
+        label: Shared Website Content
+        type: object
+        fields:
+          - name: gov_bar_text
+            label: Government bar text
+            type: string
+          - name: org_name
+            label: Organization name
+            type: string
+          - name: org_slogan
+            label: Organization slogan
+            type: string
+          - name: org_location
+            label: Header location
+            type: string
+          - name: nav_home
+            label: Home navigation label
+            type: string
+          - name: nav_about
+            label: About navigation label
+            type: string
+          - name: nav_services
+            label: Services navigation label
+            type: string
+          - name: nav_payments
+            label: Payments navigation label
+            type: string
+          - name: nav_rates
+            label: Rates navigation label
+            type: string
+          - name: nav_careers
+            label: Careers navigation label
+            type: string
+          - name: nav_news
+            label: News navigation label
+            type: string
+          - name: nav_faq
+            label: FAQ navigation label
+            type: string
+          - name: nav_contact
+            label: Contact navigation label
+            type: string
+          - name: gov_transparency
+            label: Transparency link label
+            type: string
+          - name: gov_charter
+            label: Citizen's Charter link label
+            type: string
+          - name: gov_foi
+            label: FOI link label
+            type: string
+          - name: footer_tagline
+            label: Footer tagline
+            type: text
+          - name: footer_address
+            label: Footer address
+            type: string
+          - name: footer_phone
+            label: Footer phone
+            type: string
+          - name: footer_email
+            label: Footer email
+            type: string
+          - name: footer_copyright
+            label: Footer copyright line
+            type: string
+          - name: footer_legal
+            label: Footer legal line
+            type: string
+      - name: home
+        label: Homepage Content
+        type: object
+        fields:
+          - name: eyebrow
+            label: Hero eyebrow
+            type: string
+          - name: title
+            label: Hero heading
+            type: string
+          - name: lead
+            label: Hero description
+            type: text
+          - name: tagline
+            label: Hero tagline
+            type: text
+          - name: hero_image
+            label: Hero photo
+            type: image
+            options:
+              media: images
+          - name: primary_button
+            label: Primary button label
+            type: string
+          - name: secondary_button
+            label: Secondary button label
+            type: string
+          - name: stats
+            label: Homepage statistics
+            type: object
+            list: true
+            fields:
+              - name: value
+                label: Value
+                type: string
+              - name: label
+                label: Description
+                type: string
+          - name: shortcuts_heading
+            label: Quick links heading
+            type: string
+          - name: shortcuts_intro
+            label: Quick links description
+            type: text
+          - name: shortcuts
+            label: Quick link cards
+            type: object
+            list: true
+            fields:
+              - name: title
+                label: Card title
+                type: string
+              - name: description
+                label: Card description
+                type: text
+              - name: button
+                label: Card link label
+                type: string
+              - name: target
+                label: Destination page
+                type: select
+                options:
+                  values: [payments.html, services.html, rates.html, contact.html, about.html, news.html, projects.html]
+              - name: icon
+                label: Icon style
+                type: select
+                options:
+                  values: [wallet, droplet, calculator, message-circle, info, file-text, construction]
+              - name: image
+                label: Optional card photo
+                type: image
+                options:
+                  media: images
+              - name: image_alt
+                label: Photo description
+                type: string
+          - name: news_heading
+            label: Latest news heading
+            type: string
+          - name: news_intro
+            label: Latest news description
+            type: text
+          - name: news_button
+            label: Latest news button label
+            type: string
+      - name: about
+        label: About Us Content
+        type: object
+        fields:
+          - name: title
+            label: Page heading
+            type: string
+          - name: intro
+            label: Introduction
+            type: text
+          - name: mission_heading
+            label: Mission heading
+            type: string
+          - name: mission_body
+            label: Mission text
+            type: text
+          - name: vision_heading
+            label: Vision heading
+            type: string
+          - name: vision_body
+            label: Vision text
+            type: text
+          - name: leadership_heading
+            label: Leadership heading
+            type: string
+          - name: leadership_intro
+            label: Leadership description
+            type: text
+          - name: board_heading
+            label: Board chart label
+            type: string
+          - name: partnership_heading
+            label: Partnership section heading
+            type: string
+          - name: partnership_intro
+            label: Partnership description
+            type: text
+          - name: jva_heading
+            label: Joint venture heading
+            type: string
+          - name: jva_paragraph_1
+            label: Joint venture paragraph 1
+            type: text
+          - name: jva_paragraph_2
+            label: Joint venture paragraph 2
+            type: text
+          - name: jva_note_heading
+            label: Note heading
+            type: string
+          - name: jva_note_body
+            label: Note text
+            type: text
+          - name: service_area_heading
+            label: Service area heading
+            type: string
+          - name: service_area_intro
+            label: Service area description
+            type: text
+          - name: service_area_summary
+            label: Barangay list toggle label
+            type: string
+          - name: barangays
+            label: Served barangays
+            type: string
+            list: true
+          - name: service_area_note
+            label: Service area note
+            type: text
+      - name: services
+        label: Services Page Content
+        type: object
+        fields:
+          - name: title
+            label: Page heading
+            type: string
+          - name: intro
+            label: Page introduction
+            type: text
+          - name: connection_heading
+            label: New connection heading
+            type: string
+          - name: connection_intro
+            label: New connection description
+            type: text
+          - name: connection_steps
+            label: Application steps
+            type: object
+            list: true
+            fields:
+              - name: title
+                label: Step title
+                type: string
+              - name: description
+                label: Step description
+                type: text
+          - name: other_services_heading
+            label: Other services heading
+            type: string
+          - name: other_services_intro
+            label: Other services description
+            type: text
+          - name: requirements_heading
+            label: Requirements heading
+            type: string
+          - name: requirements_columns
+            label: Requirements table column labels
+            type: string
+            list: true
+          - name: requirements_rows
+            label: Requirements table rows
+            type: object
+            list: true
+            fields:
+              - name: requirement
+                label: Requirement
+                type: string
+              - name: new_connection
+                label: New connection
+                type: string
+              - name: reconnection
+                label: Reconnection
+                type: string
+              - name: transfer
+                label: Transfer
+                type: string
+          - name: application_button
+            label: Application button label
+            type: string
+          - name: projects_heading
+            label: Projects heading
+            type: string
+          - name: projects_intro
+            label: Projects description
+            type: text
+      - name: rates
+        label: Rates and Fees Page Content
+        type: object
+        fields:
+          - name: title
+            label: Page heading
+            type: string
+          - name: intro
+            label: Introduction
+            type: text
+          - name: estimator_heading
+            label: Estimator heading
+            type: string
+          - name: estimator_intro
+            label: Estimator description
+            type: text
+          - name: consumption_label
+            label: Consumption input label
+            type: string
+          - name: consumption_placeholder
+            label: Consumption input placeholder
+            type: string
+          - name: estimate_button
+            label: Estimate button label
+            type: string
+          - name: rate_notice
+            label: Rate notice
+            type: text
+          - name: rate_schedule_heading
+            label: Rate schedule heading
+            type: string
+          - name: rate_schedule_column_item
+            label: Rate table first column
+            type: string
+          - name: rate_schedule_column_amount
+            label: Rate table second column
+            type: string
+          - name: schedule_download_label
+            label: PDF download label
+            type: string
+      - name: careers
+        label: Careers Page Content
+        type: object
+        fields:
+          - name: title
+            label: Page heading
+            type: string
+          - name: intro
+            label: Introduction
+            type: text
+          - name: openings_heading
+            label: Current openings heading
+            type: string
+          - name: apply_heading
+            label: How to apply heading
+            type: string
+          - name: application_steps
+            label: Application steps
+            type: object
+            list: true
+            fields:
+              - name: title
+                label: Step title
+                type: string
+              - name: description
+                label: Step description
+                type: text
+          - name: qualifications_heading
+            label: Qualification standards heading
+            type: string
+          - name: qualifications_intro
+            label: Qualification standards description
+            type: text
+          - name: contact_hr_button
+            label: Contact HR button label
+            type: string
+      - name: news
+        label: News Page Content
+        type: object
+        fields:
+          - name: title
+            label: Page heading
+            type: string
+          - name: intro
+            label: Introduction
+            type: text
+      - name: faq
+        label: FAQ Page Content
+        type: object
+        fields:
+          - name: title
+            label: Page heading
+            type: string
+          - name: intro
+            label: Introduction
+            type: text
+      - name: contact
+        label: Contact Page Content
+        type: object
+        fields:
+          - name: title
+            label: Page heading
+            type: string
+          - name: intro
+            label: Introduction
+            type: text
+          - name: office_heading
+            label: Office information heading
+            type: string
+          - name: address_label
+            label: Address label
+            type: string
+          - name: address
+            label: Office address
+            type: string
+          - name: phone_label
+            label: Phone label
+            type: string
+          - name: phone
+            label: Phone number
+            type: string
+          - name: phone_href
+            label: Phone link
+            type: string
+          - name: email_label
+            label: Email label
+            type: string
+          - name: email
+            label: Email address
+            type: string
+          - name: email_href
+            label: Email link
+            type: string
+          - name: office_hours_label
+            label: Office hours label
+            type: string
+          - name: office_hours
+            label: Office hours
+            type: string
+          - name: office_hours_note
+            label: Office hours note
+            type: string
+          - name: form_heading
+            label: Contact form heading
+            type: string
+          - name: success_heading
+            label: Form success heading
+            type: string
+          - name: success_message
+            label: Form success message
+            type: text
+          - name: error_message
+            label: Form error message
+            type: text
+          - name: name_label
+            label: Name field label
+            type: string
+          - name: email_field_label
+            label: Email field label
+            type: string
+          - name: subject_label
+            label: Subject field label
+            type: string
+          - name: subject_placeholder
+            label: Subject field placeholder
+            type: string
+          - name: subject_options
+            label: Subject choices
+            type: string
+            list: true
+          - name: message_label
+            label: Message field label
+            type: string
+          - name: consent_text
+            label: Consent text
+            type: text
+          - name: consent_error
+            label: Consent error text
+            type: string
+          - name: send_button
+            label: Send button label
+            type: string
+          - name: sending_button
+            label: Sending state label
+            type: string
+      - name: transparency
+        label: Transparency Page Content
+        type: object
+        fields:
+          - name: title
+            label: Page heading
+            type: string
+          - name: intro
+            label: Introduction
+            type: text
+          - name: seal_heading
+            label: Seal heading
+            type: string
+          - name: seal_paragraph_1
+            label: Seal paragraph 1
+            type: text
+          - name: seal_paragraph_2
+            label: Seal paragraph 2
+            type: text
+          - name: legal_basis
+            label: Legal basis text
+            type: text
+          - name: documents_heading
+            label: Documents heading
+            type: string
+          - name: charter_heading
+            label: Citizen's Charter heading
+            type: string
+          - name: charter_intro
+            label: Citizen's Charter description
+            type: text
+          - name: charter_placeholder
+            label: Citizen's Charter status text
+            type: text
+          - name: charter_document
+            label: Citizen's Charter PDF (optional)
+            type: file
+            options:
+              media: documents
+          - name: foi_heading
+            label: FOI heading
+            type: string
+          - name: foi_intro
+            label: FOI description
+            type: text
+          - name: foi_url
+            label: FOI portal URL
+            type: string
+          - name: foi_button
+            label: FOI button label
+            type: string
+          - name: foi_contact_button
+            label: Contact request button label
+            type: string
+      - name: search
+        label: Search Page Content
+        type: object
+        fields:
+          - name: title
+            label: Page heading
+            type: string
+          - name: placeholder
+            label: Search placeholder
+            type: string
+          - name: button
+            label: Search button
+            type: string

@@ -13,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/styles.css">
 </head>
-<body>
+<body class="bg-waves">
 
 <div class="gov-bar">
   <div class="container">
@@ -108,20 +108,24 @@
   <section id="leadership">
     <div class="container">
       <div class="section-head">
-        <h2>Leadership</h2>
+        <h2>Organizational Chart &amp; Leadership</h2>
         <p>CWD is governed by a Board of Directors and managed day-to-day by the General Manager.</p>
       </div>
 
-      <!-- Board of Directors -->
-      <h3 style="margin-bottom:1rem; color:var(--teal-deep);">Board of Directors</h3>
+      <!-- Organizational chart (filled from data/about.json) -->
       <p id="board-loading" style="color:var(--ink-soft);">Loading…</p>
-      <p id="board-error" hidden style="color:var(--danger);">Unable to load board information.</p>
-      <div id="board-list" class="grid" aria-live="polite"></div>
-
-      <!-- Management — hidden if empty -->
-      <div id="management-section" hidden>
-        <h3 style="margin:2rem 0 1rem; color:var(--teal-deep);">Management</h3>
-        <div id="management-list" class="grid" aria-live="polite"></div>
+      <p id="board-error" hidden style="color:var(--danger);">Unable to load leadership information.</p>
+      <div id="org-chart" class="org-chart" aria-live="polite" hidden>
+        <div class="org-board">
+          <p class="org-label">Board of Directors</p>
+          <div id="org-chair" class="org-row"></div>
+          <div id="org-board-line" class="org-line" hidden aria-hidden="true"></div>
+          <div id="org-board" class="org-row"></div>
+        </div>
+        <div id="org-mgmt-line" class="org-line org-line-long" hidden aria-hidden="true"></div>
+        <div id="org-gm" class="org-row"></div>
+        <div id="org-dept-line" class="org-line" hidden aria-hidden="true"></div>
+        <div id="org-dept" class="org-row"></div>
       </div>
     </div>
   </section>
@@ -181,26 +185,38 @@
 <script src="assets/script.js"></script>
 <script>
 (function () {
-  function person(p, sub) {
-    var c = document.createElement("div"); c.className = "card";
-    if (p.photo) { var i = document.createElement("img"); i.src = p.photo; i.alt = p.name || ""; i.style.cssText = "width:100%;max-height:220px;object-fit:cover;border-radius:var(--radius);margin-bottom:1rem;"; c.appendChild(i); }
-    var h = document.createElement("h3"); h.textContent = p.name || ""; c.appendChild(h);
-    var t = document.createElement("p"); t.textContent = sub; c.appendChild(t);
+  var AVATAR = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>';
+  function card(p, sub, big) {
+    var c = document.createElement("div"); c.className = "org-card" + (big ? " org-card-lg" : "");
+    var ph = document.createElement("div"); ph.className = "org-photo";
+    if (p.photo) { var i = document.createElement("img"); i.src = p.photo; i.alt = p.name ? "Photo of " + p.name : ""; i.loading = "lazy"; ph.appendChild(i); } else { ph.innerHTML = AVATAR; }
+    var n = document.createElement("h3"); n.textContent = p.name || "";
+    var r = document.createElement("p"); r.textContent = sub || "";
+    c.appendChild(ph); c.appendChild(n); c.appendChild(r);
     return c;
   }
+  function rank(pos) { pos = (pos || "").toLowerCase(); if (/vice/.test(pos)) return 2; if (/chair/.test(pos)) return 1; if (/secretary/.test(pos)) return 3; return 4; }
+  function $(id) { return document.getElementById(id); }
   fetch("data/about.json").then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (d) {
-    document.getElementById("board-loading").hidden = true;
-    var bl = document.getElementById("board-list");
-    (d.board || []).forEach(function (p) { bl.appendChild(person(p, p.position || "")); });
-    var m = d.management || [];
-    if (m.length) {
-      var ml = document.getElementById("management-list");
-      m.forEach(function (p) { ml.appendChild(person(p, [p.title, p.office].filter(Boolean).join(", "))); });
-      document.getElementById("management-section").hidden = false;
-    }
+    var board = (d.board || []).map(function (p, i) { return { p: p, i: i, r: rank(p.position) }; })
+      .sort(function (a, b) { return a.r - b.r || a.i - b.i; });
+    var chair = board.length && board[0].r === 1 ? board.shift() : null;
+    if (chair) $("org-chair").appendChild(card(chair.p, chair.p.position, true));
+    board.forEach(function (x) { $("org-board").appendChild(card(x.p, x.p.position)); });
+    if (chair && board.length) $("org-board-line").hidden = false;
+    var mg = (d.management || []).slice(), gi = -1;
+    mg.forEach(function (p, i) { if (gi < 0 && /general manager/i.test(p.title || "")) gi = i; });
+    var gm = gi > -1 ? mg.splice(gi, 1)[0] : null;
+    function sub(p) { return [p.title, p.office].filter(Boolean).join(", "); }
+    if (gm) $("org-gm").appendChild(card(gm, sub(gm), true));
+    mg.forEach(function (p) { $("org-dept").appendChild(card(p, sub(p))); });
+    if (gm || mg.length) $("org-mgmt-line").hidden = false;
+    if (gm && mg.length) $("org-dept-line").hidden = false;
+    $("board-loading").hidden = true;
+    $("org-chart").hidden = false;
   }).catch(function () {
-    document.getElementById("board-loading").hidden = true;
-    document.getElementById("board-error").hidden = false;
+    $("board-loading").hidden = true;
+    $("board-error").hidden = false;
   });
 }());
 </script>

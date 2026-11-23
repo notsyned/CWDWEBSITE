@@ -182,7 +182,7 @@ document.addEventListener("DOMContentLoaded", function () {
     el.replaceChildren(frag);
   }
   var page = location.pathname.split("/").pop() || "index.html";
-  fetch("data/page-content.json", {cache:"no-store"}).then(function(r){
+  fetch("data/page-content.json?hero-refresh=stable-path-20261123", {cache:"no-store"}).then(function(r){
     if(!r.ok) throw new Error("CMS page content unavailable");
     return r.json();
   }).then(function(d){

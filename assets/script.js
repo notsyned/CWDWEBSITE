@@ -226,7 +226,16 @@ document.addEventListener("DOMContentLoaded", function () {
           heroImg.onerror=function(){
             console.error("PagesCMS hero image failed to load:", heroImg.src);
             hero.classList.remove("home-hero-photo-loaded");
-            heroImg.remove();
+            var fallback=heroImg.getAttribute("data-fallback-src");
+            if(fallback && heroImg.src!==new URL(fallback,document.baseURI).href){
+              // If the cache-busted URL is rejected, try the literal uploaded path.
+              heroImg.onerror=function(){
+                heroImg.hidden=true; // CSS placeholder remains visible behind the image.
+              };
+              heroImg.src=new URL(fallback,document.baseURI).href;
+            } else {
+              heroImg.hidden=true;
+            }
           };
           // Avoid reusing a cached copy after a CMS image change.
           var resolved=new URL(heroUrl);

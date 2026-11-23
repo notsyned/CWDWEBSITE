@@ -1169,3 +1169,19 @@ section[id] { scroll-margin-top: 96px; }
   border-radius: 8px;
   margin: 0 0 1rem;
 }
+
+
+/* PagesCMS homepage hero: render the chosen image as a contained card image. */
+.home-hero-photo { position: relative; overflow: hidden; background-color: #d9f0f4; }
+.home-hero-photo .home-hero-cms-image {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: inherit;
+  z-index: 0;
+}
+.home-hero-photo.home-hero-photo-loaded::after { z-index: 1; }

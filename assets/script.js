@@ -202,7 +202,34 @@ document.addEventListener("DOMContentLoaded", function () {
     (maps[page] || []).forEach(function(pair){ put(pair[0],pair[1]); });
     if(page==="index.html"){
       var hero=document.querySelector(".home-hero-photo");
-      if(hero && d.home.hero_image) hero.style.backgroundImage="linear-gradient(180deg,rgba(7,63,82,.02),rgba(7,63,82,.12)),url('"+d.home.hero_image.replace(/'/g,"%27")+"')";
+      var rawHero=(d.home && typeof d.home.hero_image==="string") ? d.home.hero_image.trim() : "";
+      if(hero && rawHero){
+        var heroUrl="";
+        try {
+          // PagesCMS media paths may be saved with a leading slash. Strip it so
+          // GitHub Pages project sites keep the /CWDWEBSITE/ base path.
+          if (/^https?:\/\//i.test(rawHero)) {
+            heroUrl=rawHero;
+          } else {
+            heroUrl=new URL(rawHero.replace(/^\/+/, "").replace(/^\.\//, ""), document.baseURI).href;
+          }
+        } catch (error) {
+          console.error("Could not resolve the CMS homepage image path.", error);
+        }
+        if(heroUrl){
+          var heroPreload=new Image();
+          heroPreload.onload=function(){
+            hero.style.backgroundImage='linear-gradient(180deg,rgba(7,63,82,.02),rgba(7,63,82,.12)),url("'+heroUrl.replace(/"/g,"%22")+'")';
+            hero.classList.add("home-hero-photo-loaded");
+            hero.setAttribute("aria-label","Homepage photo selected in PagesCMS");
+          };
+          heroPreload.onerror=function(){
+            console.error("The PagesCMS homepage image could not be loaded:",heroUrl);
+            // Do not blank out the CSS placeholder when an upload path is invalid.
+          };
+          heroPreload.src=heroUrl;
+        }
+      }
       fillList("main > section:nth-of-type(3) .grid",d.home.shortcuts,function(item){
         var card=make("article","card");
         if(item.image){var im=make("img","home-shortcut-img");im.src=item.image;im.alt=item.image_alt||item.title;im.loading="lazy";card.appendChild(im);}

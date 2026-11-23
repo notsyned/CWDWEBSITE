@@ -211,7 +211,7 @@
   var servicesLoading = document.getElementById("services-loading");
   var servicesError   = document.getElementById("services-error");
 
-  fetch("data/services.json")
+  fetch("data/services.json", { cache: "no-store" })
     .then(function (res) {
       if (!res.ok) throw new Error("HTTP " + res.status);
       return res.json();
@@ -224,29 +224,50 @@
         return;
       }
       items.forEach(function (item) {
+        if (!item || typeof item !== "object") return;
+
         var card = document.createElement("div");
-        card.className = "card";
+        card.className = "card service-card";
+
+        // Optional service photo uploaded through PagesCMS.
+        if (typeof item.image === "string" && item.image.trim()) {
+          var img = document.createElement("img");
+          img.className = "service-card-image";
+          img.src = item.image;
+          img.alt = item.image_alt || item.name || "CWD service";
+          img.loading = "lazy";
+          card.appendChild(img);
+        }
 
         var h3 = document.createElement("h3");
-        h3.textContent = item.name;
+        h3.textContent = item.name || "Service";
 
         var desc = document.createElement("p");
-        desc.textContent = item.description;
+        desc.textContent = item.description || "";
 
         card.appendChild(h3);
         card.appendChild(desc);
 
-        // Requirements list — only if present and non-empty
-        if (item.requirements && item.requirements.length > 0) {
+        // Requirements are configured as a CMS text field, but arrays are accepted too.
+        var requirements = [];
+        if (Array.isArray(item.requirements)) {
+          requirements = item.requirements;
+        } else if (typeof item.requirements === "string" && item.requirements.trim()) {
+          requirements = item.requirements.split(/\r?\n|,\s*/).map(function (value) {
+            return value.trim();
+          }).filter(Boolean);
+        }
+
+        if (requirements.length) {
           var reqHeading = document.createElement("p");
           reqHeading.style.cssText = "font-size:0.85rem; font-weight:700; margin-top:0.75rem; margin-bottom:0.25rem; color:var(--teal-deep);";
           reqHeading.textContent = "Requirements:";
 
           var ul = document.createElement("ul");
           ul.style.cssText = "font-size:0.85rem; padding-left:1.2rem; margin:0;";
-          item.requirements.forEach(function (req) {
+          requirements.forEach(function (req) {
             var li = document.createElement("li");
-            li.textContent = req;
+            li.textContent = String(req);
             ul.appendChild(li);
           });
 

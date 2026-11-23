@@ -178,13 +178,13 @@ content:
         type: text
 
   - name: services
-    label: Services
+    label: Other Services — Service Cards
     type: file
     path: data/services.json
     format: json
     fields:
       - name: items
-        label: Services
+        label: Public-facing service cards
         type: object
         list: true
         fields:
@@ -195,7 +195,7 @@ content:
             label: Description
             type: text
           - name: image
-            label: Optional service photo
+            label: Service photo (optional)
             type: image
             options:
               media: images

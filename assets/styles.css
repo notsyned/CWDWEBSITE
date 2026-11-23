@@ -1148,3 +1148,24 @@ section[id] { scroll-margin-top: 96px; }
     text-align: center;
   }
 }
+
+
+/* Services CMS cards: image sizing is controlled by the design, not upload dimensions. */
+#services-list > .service-card {
+  min-width: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.service-card-image {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  max-height: 220px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 8px;
+  margin: 0 0 1rem;
+}

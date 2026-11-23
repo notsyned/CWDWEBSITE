@@ -28,7 +28,7 @@
     "title": "Bawat Patak para sa Kalusugan ng Pamilyang Camiling.",
     "lead": "\"Every Drop, For Every Camiling Family's Health.\" CWD has delivered water service to the Municipality of Camiling since 1976.",
     "tagline": "Malinis Ngayon, Ligtas Bukas. Buhay na Dulot ng Bawat Patak.",
-    "hero_image": "assets/home-hero-placeholder.webp",
+    "hero_image": "images/uploads/Image 8-4-26 at 4.30 PM-1.png",
     "primary_button": "Pay Your Bill",
     "secondary_button": "New Service Connection",
     "stats": [
@@ -53,36 +53,28 @@
         "description": "GCash, Maya, 7-Eleven, Bayad Center, and more.",
         "button": "View payment channels",
         "target": "payments.html",
-        "icon": "wallet",
-        "image": "",
-        "image_alt": ""
+        "icon": "wallet"
       },
       {
         "title": "Apply for a new connection",
         "description": "Requirements and steps for residential and commercial service.",
         "button": "Start an application",
         "target": "services.html",
-        "icon": "droplet",
-        "image": "",
-        "image_alt": ""
+        "icon": "droplet"
       },
       {
         "title": "Check current rates",
         "description": "Estimate your bill using the current approved rate schedule.",
         "button": "Use the bill estimator",
         "target": "rates.html",
-        "icon": "calculator",
-        "image": "",
-        "image_alt": ""
+        "icon": "calculator"
       },
       {
         "title": "Report a concern",
         "description": "Leaks, outages, or billing questions — reach our office directly.",
         "button": "Contact us",
         "target": "contact.html",
-        "icon": "message-circle",
-        "image": "",
-        "image_alt": ""
+        "icon": "message-circle"
       }
     ],
     "news_heading": "Latest News",

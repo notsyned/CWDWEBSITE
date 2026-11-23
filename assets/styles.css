@@ -825,16 +825,16 @@ section[id] { scroll-margin-top: 96px; }
 /* ---------- Water backgrounds: layered water illustration ---------- */
 .bg-waves,.bg-drops,.bg-splash {
   background-color:#f5fbfc;
-  background-image:linear-gradient(180deg,rgba(247,252,253,.3),rgba(247,252,253,.48)),url("water-background.svg");
+  background-image:linear-gradient(180deg,rgba(247,252,253,.06),rgba(247,252,253,.14)),url("water-background.svg");
   background-repeat:no-repeat,no-repeat;
   background-position:center,center;
   background-size:cover,cover;
   background-attachment:fixed,fixed;
 }
-.bg-waves main>section,.bg-drops main>section,.bg-splash main>section {background-color:rgba(255,255,255,.68);}
+.bg-waves main>section,.bg-drops main>section,.bg-splash main>section {background-color:rgba(255,255,255,.34);}
 .bg-waves main>section.section-tint,.bg-drops main>section.section-tint,.bg-splash main>section.section-tint {
-  background:linear-gradient(115deg,rgba(229,244,248,.91),rgba(245,251,252,.89));
-  border-top:1px solid rgba(78,159,181,.14);border-bottom:1px solid rgba(78,159,181,.14);
+  background:linear-gradient(115deg,rgba(229,244,248,.73),rgba(245,251,252,.66));
+  border-top:1px solid rgba(78,159,181,.24);border-bottom:1px solid rgba(78,159,181,.14);
 }
 .bg-waves .card,.bg-drops .card,.bg-splash .card {background:rgba(255,255,255,.98);}
 @media(max-width:700px){.bg-waves,.bg-drops,.bg-splash{background-attachment:scroll,scroll;background-position:center top,center top;background-size:auto,auto;}}

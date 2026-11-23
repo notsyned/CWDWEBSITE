@@ -204,30 +204,36 @@ document.addEventListener("DOMContentLoaded", function () {
       var hero=document.querySelector(".home-hero-photo");
       var rawHero=(d.home && typeof d.home.hero_image==="string") ? d.home.hero_image.trim() : "";
       if(hero && rawHero){
-        var heroUrl="";
         try {
-          // PagesCMS media paths may be saved with a leading slash. Strip it so
-          // GitHub Pages project sites keep the /CWDWEBSITE/ base path.
-          if (/^https?:\/\//i.test(rawHero)) {
-            heroUrl=rawHero;
-          } else {
-            heroUrl=new URL(rawHero.replace(/^\/+/, "").replace(/^\.\//, ""), document.baseURI).href;
+          var heroUrl=/^https?:\/\//i.test(rawHero)
+            ? rawHero
+            : new URL(rawHero.replace(/^\/+/, "").replace(/^\.\//, ""), document.baseURI).href;
+          // Use an actual image element rather than a CSS background so load
+          // errors are easier to diagnose and image paths are resolved reliably.
+          var heroImg=hero.querySelector(".home-hero-cms-image");
+          if(!heroImg){
+            heroImg=document.createElement("img");
+            heroImg.className="home-hero-cms-image";
+            heroImg.alt="Homepage image selected in PagesCMS";
+            heroImg.decoding="async";
+            heroImg.loading="eager";
+            hero.replaceChildren(heroImg);
           }
-        } catch (error) {
-          console.error("Could not resolve the CMS homepage image path.", error);
-        }
-        if(heroUrl){
-          var heroPreload=new Image();
-          heroPreload.onload=function(){
-            hero.style.backgroundImage='linear-gradient(180deg,rgba(7,63,82,.02),rgba(7,63,82,.12)),url("'+heroUrl.replace(/"/g,"%22")+'")';
+          heroImg.onload=function(){
             hero.classList.add("home-hero-photo-loaded");
-            hero.setAttribute("aria-label","Homepage photo selected in PagesCMS");
+            hero.setAttribute("aria-label",heroImg.alt);
           };
-          heroPreload.onerror=function(){
-            console.error("The PagesCMS homepage image could not be loaded:",heroUrl);
-            // Do not blank out the CSS placeholder when an upload path is invalid.
+          heroImg.onerror=function(){
+            console.error("PagesCMS hero image failed to load:", heroImg.src);
+            hero.classList.remove("home-hero-photo-loaded");
+            heroImg.remove();
           };
-          heroPreload.src=heroUrl;
+          // Avoid reusing a cached copy after a CMS image change.
+          var resolved=new URL(heroUrl);
+          resolved.searchParams.set("cms-refresh","20261123");
+          heroImg.src=resolved.href;
+        } catch(error) {
+          console.error("Could not load the PagesCMS homepage image:",error);
         }
       }
       fillList("main > section:nth-of-type(3) .grid",d.home.shortcuts,function(item){

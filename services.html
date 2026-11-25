@@ -12,7 +12,7 @@
 <meta property="og:title" content="Services — Camiling Water District">
 <meta property="og:description" content="New service connection steps, other services, requirements, and projects of the Camiling Water District.">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=water-visible-20261123">
+<link rel="stylesheet" href="assets/styles.css?v=cms-audit-20261125">
 </head>
 <body class="bg-drops">
 
@@ -100,7 +100,7 @@
         <h2>New Service Connection</h2>
         <p>Steps to apply for a new residential or commercial water connection.</p>
       </div>
-      <div class="grid" style="grid-template-columns: repeat(4, 1fr);">
+      <div id="connection-steps" class="grid" style="grid-template-columns: repeat(4, 1fr);">
         <div class="card"><div class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg></div><h3>1. Submit requirements</h3><p>Application form, valid ID, proof of property/lot ownership or authorization.</p></div>
         <div class="card"><div class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg></div><h3>2. Site inspection</h3><p>CWD staff inspect the connection site and assess feasibility.</p></div>
         <div class="card"><div class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div><h3>3. Pay connection fee</h3><p>Settle the applicable connection and meter installation fee.</p></div>
@@ -113,6 +113,7 @@
     <div class="container">
       <div class="section-head">
         <h2>Other services</h2>
+        <p id="other-services-intro">Browse the additional services offered by CWD.</p>
       </div>
       <!-- Loading / error states -->
       <p id="services-loading" style="color:var(--ink-soft);">Loading services…</p>
@@ -125,7 +126,7 @@
   <section class="section-tint" id="requirements">
     <div class="container">
       <h2>Requirements checklist</h2>
-      <table>
+      <table id="requirements-table">
         <thead><tr><th>Requirement</th><th>New Connection</th><th>Reconnection</th><th>Transfer</th></tr></thead>
         <tbody>
           <tr><td>Valid government ID</td><td>Required</td><td>Required</td><td>Required</td></tr>
@@ -134,7 +135,7 @@
           <tr><td>Accomplished application form</td><td>Required</td><td>Required</td><td>Required</td></tr>
         </tbody>
       </table>
-      <p style="margin-top:1.5rem;"><a href="contact.html" class="btn btn-primary">Start an application</a></p>
+      <p style="margin-top:1.5rem;"><a id="application-button" href="contact.html" class="btn btn-primary">Start an application</a></p>
     </div>
   </section>
 
@@ -168,7 +169,7 @@
   </div>
 </footer>
 
-<script src="assets/script.js?v=20261118-fix3"></script>
+<script src="assets/script.js?v=cms-audit-20261125"></script>
 <script>
 (function () {
 
@@ -300,7 +301,7 @@
     return d.toLocaleDateString("en-PH", { year: "numeric", month: "long", day: "numeric" });
   }
 
-  fetch("data/projects.json")
+  fetch("data/projects.json", { cache: "no-store" })
     .then(function (res) {
       if (!res.ok) throw new Error("HTTP " + res.status);
       return res.json();

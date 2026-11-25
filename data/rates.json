@@ -22,5 +22,10 @@
       "name": "Reconnection fee",
       "amount": 80
     }
-  ]
+  ],
+  "verified": false,
+  "verification_note": "Water rates are hidden until Finance verifies the current approved schedule. Please contact CWD for current rates.",
+  "minimum_consumption": 0,
+  "minimum_charge": 0,
+  "excess_rate": 0
 }

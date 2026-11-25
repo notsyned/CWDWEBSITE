@@ -12,7 +12,7 @@
 <meta property="og:title" content="Rates &amp; Fees — Camiling Water District">
 <meta property="og:description" content="Water rates and fees of the Camiling Water District, plus a bill estimator.">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=water-visible-20261123">
+<link rel="stylesheet" href="assets/styles.css?v=cms-audit-20261125">
 </head>
 <body class="bg-waves">
 
@@ -119,7 +119,7 @@
         <button type="button" class="btn btn-primary" id="estimate-btn">Estimate my bill</button>
         <p id="estimate-result" style="margin-top:1rem; font-weight:700; color:var(--teal-deep);" aria-live="polite"></p>
       </div>
-      <p class="notice" style="margin-top:1.5rem; max-width:560px;">Rate figures shown here are placeholders pending confirmation with Finance — do not publish until the actual approved schedule is confirmed in <code>data/rates.json</code>.</p>
+      <p id="rate-notice" class="notice" style="margin-top:1.5rem; max-width:560px;">Water rates are hidden until Finance verifies the current approved schedule.</p>
     </div>
   </section>
 
@@ -127,10 +127,11 @@
     <div class="container">
       <h2>Rate Schedule</h2>
       <p id="rates-loading" style="color:var(--ink-soft);">Loading rate schedule…</p>
+      <p id="rates-empty" class="cms-empty-state" hidden>Rates are temporarily unavailable while the approved schedule is being confirmed. Please contact CWD for current rates.</p>
       <p id="rates-error" hidden style="color:var(--danger);">Unable to load rate schedule.</p>
       <div id="rates-table-wrap" hidden>
         <table>
-          <thead><tr><th>Item</th><th>Amount</th></tr></thead>
+          <thead><tr><th id="rate-column-item">Item</th><th id="rate-column-amount">Amount</th></tr></thead>
           <tbody id="rates-tbody"></tbody>
         </table>
       </div>
@@ -156,87 +157,47 @@
   </div>
 </footer>
 
-<script src="assets/script.js?v=20261118-fix3"></script>
+<script src="assets/script.js?v=cms-audit-20261125"></script>
 <script>
 (function () {
-  var ratesData = null; // populated after fetch
-
-  // ── Fetch rates.json, then wire everything up ──────────────
-  fetch("data/rates.json")
-    .then(function (res) {
-      if (!res.ok) throw new Error("HTTP " + res.status);
-      return res.json();
-    })
-    .then(function (data) {
-      ratesData = data;
-
-      // ── Official rate schedule PDF ─────────────────────────
-      if (data.schedule_pdf) {
-        var pdfWrap = document.getElementById("schedule-pdf-wrap");
-        var pdfLink = document.getElementById("schedule-pdf-link");
-        pdfLink.href = data.schedule_pdf;
-        pdfWrap.hidden = false;
-      }
-
-      // ── Populate rate schedule table ───────────────────────
-      var tbody  = document.getElementById("rates-tbody");
-      var wrap   = document.getElementById("rates-table-wrap");
-      var loadEl = document.getElementById("rates-loading");
-      loadEl.hidden = true;
-
-      // Tiers
-      (data.tiers || []).forEach(function (t) {
-        var tr = document.createElement("tr");
-        tr.innerHTML = "<td>" + t.label + "</td><td>₱" + parseFloat(t.rate).toFixed(2) + "</td>";
-        tbody.appendChild(tr);
-      });
-
-      // Fees
-      (data.fees || []).forEach(function (f) {
-        var tr = document.createElement("tr");
-        var amt = f.amount === "[confirm]"
-          ? "<span style='color:var(--ink-soft);font-style:italic;'>Pending confirmation</span>"
-          : f.amount;
-        tr.innerHTML = "<td>" + f.name + "</td><td>" + amt + "</td>";
-        tbody.appendChild(tr);
-      });
-
-      wrap.hidden = false;
-
-      // ── Wire the estimator button ──────────────────────────
-      document.getElementById("estimate-btn").addEventListener("click", function () {
-        var tiers  = ratesData.tiers || [];
-        // Estimator uses tier[0].rate as minimum charge, tier[0] implicit
-        // minimum cum = 10 (first tier covers first 10 cu.m.)
-        // tier[1].rate as excess rate per cu.m. beyond minimum
-        var minCharge  = tiers[0] ? parseFloat(tiers[0].rate) : 0;
-        var minCum     = 10; // first tier always covers first 10 cu.m.
-        var excessRate = tiers[1] ? parseFloat(tiers[1].rate) : 0;
-
-        var cum    = parseFloat(document.getElementById("consumption").value);
-        var result = document.getElementById("estimate-result");
-
-        if (isNaN(cum) || cum < 0) {
-          result.textContent = "Please enter a valid number of cubic meters.";
-          return;
-        }
-
-        // Identical formula to the original estimator
-        var total = minCharge;
-        if (cum > minCum) {
-          total += (cum - minCum) * excessRate;
-        }
-        result.textContent = "Estimated bill: ₱" + total.toFixed(2) + " (excludes penalties/other fees)";
+  var loadEl=document.getElementById("rates-loading"), errorEl=document.getElementById("rates-error");
+  var emptyEl=document.getElementById("rates-empty"), tableWrap=document.getElementById("rates-table-wrap");
+  var tbody=document.getElementById("rates-tbody"), estimateBtn=document.getElementById("estimate-btn");
+  var result=document.getElementById("estimate-result"), pdfWrap=document.getElementById("schedule-pdf-wrap");
+  var pdfLink=document.getElementById("schedule-pdf-link"), notice=document.getElementById("rate-notice");
+  function setEmpty(msg){if(emptyEl){emptyEl.textContent=msg||"Rates are temporarily unavailable while the approved schedule is being confirmed. Please contact CWD for current rates.";emptyEl.hidden=false;}if(tableWrap)tableWrap.hidden=true;if(estimateBtn)estimateBtn.disabled=true;}
+  function addRow(label,amount){
+    var tr=document.createElement("tr"), left=document.createElement("td"), right=document.createElement("td");
+    left.textContent=String(label==null?"":label);
+    if(amount==="[confirm]"||amount===null||amount===undefined||amount==="")right.textContent="Pending confirmation";
+    else if(typeof amount==="number"&&Number.isFinite(amount))right.textContent="₱"+amount.toFixed(2);
+    else right.textContent=String(amount);
+    tr.appendChild(left);tr.appendChild(right);tbody.appendChild(tr);
+  }
+  fetch("data/rates.json?cms-rates=20261125",{cache:"no-store"})
+    .then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json();})
+    .then(function(data){
+      if(loadEl)loadEl.hidden=true;
+      if(data.schedule_pdf&&pdfWrap&&pdfLink){pdfLink.href=data.schedule_pdf;pdfWrap.hidden=false;}
+      if(data.verified!==true){setEmpty(data.verification_note||"Rates are hidden until Finance verifies the current approved schedule.");return;}
+      var tiers=Array.isArray(data.tiers)?data.tiers:[], fees=Array.isArray(data.fees)?data.fees:[];
+      tbody.replaceChildren();tiers.forEach(function(t){if(t&&typeof t==="object")addRow(t.label||"Water rate",t.rate);});
+      fees.forEach(function(f){if(f&&typeof f==="object")addRow(f.name||"Fee",f.amount);});
+      if(!tbody.children.length){setEmpty("No verified rate rows are available yet. Please contact CWD for the latest approved schedule.");return;}
+      if(tableWrap)tableWrap.hidden=false;if(emptyEl)emptyEl.hidden=true;
+      if(notice&&data.verification_note)notice.textContent=data.verification_note;
+      var minUse=Number(data.minimum_consumption), minCharge=Number(data.minimum_charge), excess=Number(data.excess_rate);
+      var ready=Number.isFinite(minUse)&&minUse>0&&Number.isFinite(minCharge)&&minCharge>=0&&Number.isFinite(excess)&&excess>=0;
+      if(estimateBtn)estimateBtn.disabled=!ready;
+      if(estimateBtn)estimateBtn.addEventListener("click",function(){
+        if(!ready){if(result)result.textContent="The bill estimator is unavailable until Finance verifies the rate formula.";return;}
+        var input=document.getElementById("consumption"), consumption=input?Number(input.value):NaN;
+        if(!Number.isFinite(consumption)||consumption<0){if(result)result.textContent="Please enter a valid number of cubic meters.";return;}
+        var total=minCharge;if(consumption>minUse)total+=(consumption-minUse)*excess;
+        if(result)result.textContent="Estimated bill: ₱"+total.toFixed(2)+" (excludes penalties and other fees).";
       });
     })
-    .catch(function () {
-      document.getElementById("rates-loading").hidden = true;
-      document.getElementById("rates-error").hidden = false;
-      // Fallback: still allow button to show an error
-      document.getElementById("estimate-btn").addEventListener("click", function () {
-        document.getElementById("estimate-result").textContent = "Rate data unavailable. Please try again later.";
-      });
-    });
+    .catch(function(e){if(loadEl)loadEl.hidden=true;if(errorEl)errorEl.hidden=false;setEmpty("Rates could not be loaded. Please contact CWD to confirm the current approved schedule.");console.error("Rate data could not be loaded.",e);});
 }());
 </script>
 </body>

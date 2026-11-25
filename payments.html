@@ -12,7 +12,7 @@
 <meta property="og:title" content="Payments — Camiling Water District">
 <meta property="og:description" content="Ways to pay your Camiling Water District bill: GCash, Maya, Bayad Center, 7-Eleven, and more.">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=water-visible-20261123">
+<link rel="stylesheet" href="assets/styles.css?v=cms-audit-20261125">
 </head>
 <body class="bg-splash">
 
@@ -163,6 +163,12 @@
     var card = document.createElement("div");
     card.className = "card";
 
+    if (typeof item.image === "string" && item.image.trim()) {
+      var image = document.createElement("img"); image.src = item.image;
+      image.alt = item.name ? item.name + " payment illustration" : "Payment illustration"; image.loading = "lazy";
+      image.style.cssText = "display:block;width:100%;max-height:150px;object-fit:contain;margin-bottom:0.75rem;";
+      image.onerror = function () { image.hidden = true; }; card.appendChild(image);
+    }
     var icon = document.createElement("div");
     icon.className = "card-icon";
     icon.setAttribute("aria-hidden", "true");
@@ -196,12 +202,17 @@
       setText("payment-notice-title", data.notice_title);
       setText("payment-notice-body", data.notice_body);
 
-      if (Array.isArray(data.items) && data.items.length) {
+      if (Array.isArray(data.items)) {
         var fragment = document.createDocumentFragment();
         data.items.forEach(function (item) {
           if (item && typeof item === "object") fragment.appendChild(makeCard(item));
         });
-        if (fragment.childNodes.length) channels.replaceChildren(fragment);
+        if (!fragment.childNodes.length) {
+          var empty = document.createElement("p"); empty.className = "cms-empty-state";
+          empty.textContent = "Payment methods are being confirmed. Please contact CWD before making a payment.";
+          fragment.appendChild(empty);
+        }
+        channels.replaceChildren(fragment);
       }
     })
     .catch(function (error) {
@@ -211,6 +222,6 @@
 })();
 </script>
 
-<script src="assets/script.js?v=20261118-fix3"></script>
+<script src="assets/script.js?v=cms-audit-20261125"></script>
 </body>
 </html>

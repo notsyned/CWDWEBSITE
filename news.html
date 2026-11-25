@@ -12,7 +12,7 @@
 <meta property="og:title" content="News &amp; Announcements — Camiling Water District">
 <meta property="og:description" content="News, service advisories, and announcements from the Camiling Water District, Camiling, Tarlac.">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=water-visible-20261123">
+<link rel="stylesheet" href="assets/styles.css?v=cms-audit-20261125">
 </head>
 <body class="bg-waves">
 
@@ -131,7 +131,7 @@
   </div>
 </footer>
 
-<script src="assets/script.js?v=20261118-fix3"></script>
+<script src="assets/script.js?v=cms-audit-20261125"></script>
 <script>
 (function () {
   const list    = document.getElementById("news-list");
@@ -198,7 +198,7 @@
     return article;
   }
 
-  fetch("data/news.json")
+  fetch("data/news.json", { cache: "no-store" })
     .then(function (res) {
       if (!res.ok) throw new Error("HTTP " + res.status);
       return res.json();

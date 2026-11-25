@@ -13,7 +13,7 @@
 <meta property="og:description" content="Official website of the Camiling Water District (CWD), Tarlac, Philippines.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=water-visible-20261123">
+<link rel="stylesheet" href="assets/styles.css?v=cms-audit-20261125">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"GovernmentOrganization","name":"Camiling Water District","address":{"@type":"PostalAddress","streetAddress":"Luna St.","addressLocality":"Camiling","addressRegion":"Tarlac","addressCountry":"PH"},"telephone":"(04593) 40304","email":"Camilingwaterdistrict@gmail.com"}
 </script>
@@ -141,8 +141,8 @@
   <section>
     <div class="container">
       <div class="section-head">
-        <h2>What you can do here</h2>
-        <p>Common tasks handled online, without a trip to the office.</p>
+        <h2 id="home-shortcuts-heading">What you can do here</h2>
+        <p id="home-shortcuts-intro">Common tasks handled online, without a trip to the office.</p>
       </div>
       <div class="grid">
         <div class="card">
@@ -177,13 +177,13 @@
   <section class="section-tint">
     <div class="container">
       <div class="section-head">
-        <h2>Latest News</h2>
-        <p>Advisories, schedule changes, and district updates.</p>
+        <h2 id="home-news-heading">Latest News</h2>
+        <p id="home-news-intro">Advisories, schedule changes, and district updates.</p>
       </div>
       <div id="latest-news-list" class="grid" style="grid-template-columns: repeat(auto-fit, minmax(260px,1fr));" aria-live="polite">
         <p id="latest-news-loading" style="color:var(--ink-soft);">Loading…</p>
       </div>
-      <p style="margin-top:1.5rem;"><a href="news.html" class="btn btn-outline">See all announcements</a></p>
+      <p style="margin-top:1.5rem;"><a id="home-news-button" href="news.html" class="btn btn-outline">See all announcements</a></p>
     </div>
   </section>
 
@@ -229,7 +229,7 @@
   </div>
 </footer>
 
-<script src="assets/script.js?v=hero-photo-stable-path-20261123"></script>
+<script src="assets/script.js?v=cms-audit-20261125"></script>
 <script>
 (function () {
 
@@ -259,7 +259,7 @@
     return d.toLocaleDateString("en-PH", { year: "numeric", month: "long", day: "numeric" });
   }
 
-  fetch("data/news.json")
+  fetch("data/news.json", { cache: "no-store" })
     .then(function (res) {
       if (!res.ok) throw new Error("HTTP " + res.status);
       return res.json();

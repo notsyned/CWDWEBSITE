@@ -12,7 +12,7 @@
 <meta property="og:title" content="Transparency — Camiling Water District">
 <meta property="og:description" content="Transparency Seal, Citizen's Charter, FOI, and public documents of the Camiling Water District.">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=water-visible-20261123">
+<link rel="stylesheet" href="assets/styles.css?v=cms-audit-20261125">
 </head>
 <body class="bg-drops">
 
@@ -175,14 +175,14 @@
   </div>
 </footer>
 
-<script src="assets/script.js?v=20261118-fix3"></script>
+<script src="assets/script.js?v=cms-audit-20261125"></script>
 <script>
 (function () {
   const container = document.getElementById("trans-list");
   const loading   = document.getElementById("trans-loading");
   const error     = document.getElementById("trans-error");
 
-  fetch("data/transparency.json")
+  fetch("data/transparency.json", { cache: "no-store" })
     .then(function (res) {
       if (!res.ok) throw new Error("HTTP " + res.status);
       return res.json();

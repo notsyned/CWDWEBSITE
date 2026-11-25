@@ -544,7 +544,21 @@ document.addEventListener("DOMContentLoaded", function () {
         attr('#form-error a', "href", d.contact.email_href);
         attr('#form-error a', "aria-label", "Email " + (d.contact.email || ""));
       }
-      if (page === "transparency.html" && d.transparency) attr("#foi-primary-button", "href", d.transparency.foi_url);
+      if (page === "transparency.html" && d.transparency) {
+        attr("#foi-primary-button || #foi .btn-primary", "href", d.transparency.foi_url);
+        var charterFile = typeof d.transparency.charter_document === "string" ? d.transparency.charter_document.trim() : "";
+        var charterActions = query("#charter-document-actions");
+        var charterPlaceholder = query("#charter-placeholder || #charter p:nth-of-type(2)");
+        if (charterActions && charterFile) {
+          attr("#charter-document-view", "href", charterFile);
+          attr("#charter-document-download", "href", charterFile);
+          charterActions.hidden = false;
+          if (charterPlaceholder) charterPlaceholder.hidden = true;
+        } else {
+          if (charterActions) charterActions.hidden = true;
+          if (charterPlaceholder) charterPlaceholder.hidden = false;
+        }
+      }
       if (page === "faq.html") {
         fetch("data/faq.json?cms-faq=20261125", { cache: "no-store" })
           .then(function (r) { if (!r.ok) throw new Error("FAQ data unavailable"); return r.json(); })

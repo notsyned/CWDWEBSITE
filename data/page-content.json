@@ -325,7 +325,8 @@
     "foi_intro": "CWD supports public access to official records under Executive Order No. 2, s. 2016 (Freedom of Information). You can view and track FOI requests filed with Camiling Water District through the official eFOI portal.",
     "foi_url": "https://www.foi.gov.ph/requests/?status=&category=&q=Camiling+Water+District",
     "foi_button": "View FOI Requests on eFOI Portal ↗",
-    "foi_contact_button": "Submit a Request via Contact"
+    "foi_contact_button": "Submit a Request via Contact",
+    "charter_document": ""
   },
   "search": {
     "title": "Search",

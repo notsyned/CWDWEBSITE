@@ -277,46 +277,82 @@ content:
                   media: documents
 
   - name: about
-    label: About Us (Board and Management)
+    label: Organizational Chart — Board, Management and Divisions
     type: file
     path: data/about.json
     format: json
     fields:
       - name: board
-        label: Board of Directors
+        label: Office of the Board Directors
         type: object
         list: true
         fields:
           - name: name
-            label: Full name
+            label: Person's full name
             type: string
           - name: position
-            label: Position (example Chairperson)
+            label: Position and sector
             type: string
           - name: photo
-            label: Photo (optional)
+            label: Person's photo (optional)
             type: image
             options:
               media: images
-      - name: management
-        label: Management and Department Heads
+      - name: general_manager
+        label: General Manager
+        type: object
+        fields:
+          - name: name
+            label: Person's full name
+            type: string
+          - name: title
+            label: Position title
+            type: string
+          - name: photo
+            label: Person's photo (optional)
+            type: image
+            options:
+              media: images
+      - name: support_staff
+        label: Office of the General Manager — Additional Staff
         type: object
         list: true
         fields:
           - name: name
-            label: Full name
+            label: Person's full name
             type: string
           - name: title
-            label: Title
-            type: string
-          - name: office
-            label: Office or department
+            label: Position title
             type: string
           - name: photo
-            label: Photo (optional)
+            label: Person's photo (optional)
             type: image
             options:
               media: images
+      - name: divisions
+        label: Divisions
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Division name
+            type: string
+          - name: positions
+            label: Positions in this division
+            type: object
+            list: true
+            fields:
+              - name: name
+                label: Person's full name
+                type: string
+              - name: title
+                label: Position title
+                type: string
+              - name: photo
+                label: Person's photo (optional)
+                type: image
+                options:
+                  media: images
 
   - name: payments
     label: Payments

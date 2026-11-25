@@ -12,7 +12,7 @@
 <meta property="og:title" content="About Us — Camiling Water District">
 <meta property="og:description" content="Learn about the Camiling Water District: mission, vision, leadership, the PrimeWater joint venture, and the barangays we serve.">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=water-visible-20261123">
+<link rel="stylesheet" href="assets/styles.css?v=org-chart-20261125">
 </head>
 <body class="bg-waves">
 
@@ -117,16 +117,21 @@
       <p id="board-loading" style="color:var(--ink-soft);">Loading…</p>
       <p id="board-error" hidden style="color:var(--danger);">Unable to load leadership information.</p>
       <div id="org-chart" class="org-chart" aria-live="polite" hidden>
-        <div class="org-board">
-          <p class="org-label">Board of Directors</p>
-          <div id="org-chair" class="org-row"></div>
-          <div id="org-board-line" class="org-line" hidden aria-hidden="true"></div>
-          <div id="org-board" class="org-row"></div>
-        </div>
-        <div id="org-mgmt-line" class="org-line org-line-long" hidden aria-hidden="true"></div>
-        <div id="org-gm" class="org-row"></div>
-        <div id="org-dept-line" class="org-line" hidden aria-hidden="true"></div>
-        <div id="org-dept" class="org-row"></div>
+        <section class="org-level org-board-level" aria-labelledby="org-board-heading">
+          <h3 id="org-board-heading" class="org-level-title">Office of the Board Directors</h3>
+          <div id="org-board" class="org-people-grid org-board-grid"></div>
+        </section>
+        <div class="org-connector" aria-hidden="true"></div>
+        <section class="org-level org-management-level" aria-labelledby="org-gm-heading">
+          <h3 id="org-gm-heading" class="org-level-title">Office of the General Manager</h3>
+          <div class="org-management-row">
+            <div class="org-management-spacer" aria-hidden="true"></div>
+            <div id="org-gm" class="org-gm-holder"></div>
+            <div id="org-gm-support" class="org-gm-support"></div>
+          </div>
+        </section>
+        <div class="org-connector org-connector-long" aria-hidden="true"></div>
+        <div id="org-divisions" class="org-divisions-grid" aria-label="CWD divisions"></div>
       </div>
     </div>
   </section>
@@ -187,38 +192,74 @@
 <script>
 (function () {
   var AVATAR = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>';
-  function card(p, sub, big) {
-    var c = document.createElement("div"); c.className = "org-card" + (big ? " org-card-lg" : "");
-    var ph = document.createElement("div"); ph.className = "org-photo";
-    if (p.photo) { var i = document.createElement("img"); i.src = p.photo; i.alt = p.name ? "Photo of " + p.name : ""; i.loading = "lazy"; ph.appendChild(i); } else { ph.innerHTML = AVATAR; }
-    var n = document.createElement("h3"); n.textContent = p.name || "";
-    var r = document.createElement("p"); r.textContent = sub || "";
-    c.appendChild(ph); c.appendChild(n); c.appendChild(r);
-    return c;
-  }
-  function rank(pos) { pos = (pos || "").toLowerCase(); if (/vice/.test(pos)) return 2; if (/chair/.test(pos)) return 1; if (/secretary/.test(pos)) return 3; return 4; }
   function $(id) { return document.getElementById(id); }
-  fetch("data/about.json").then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (d) {
-    var board = (d.board || []).map(function (p, i) { return { p: p, i: i, r: rank(p.position) }; })
-      .sort(function (a, b) { return a.r - b.r || a.i - b.i; });
-    var chair = board.length && board[0].r === 1 ? board.shift() : null;
-    if (chair) $("org-chair").appendChild(card(chair.p, chair.p.position, true));
-    board.forEach(function (x) { $("org-board").appendChild(card(x.p, x.p.position)); });
-    if (chair && board.length) $("org-board-line").hidden = false;
-    var mg = (d.management || []).slice(), gi = -1;
-    mg.forEach(function (p, i) { if (gi < 0 && /general manager/i.test(p.title || "")) gi = i; });
-    var gm = gi > -1 ? mg.splice(gi, 1)[0] : null;
-    function sub(p) { return [p.title, p.office].filter(Boolean).join(", "); }
-    if (gm) $("org-gm").appendChild(card(gm, sub(gm), true));
-    mg.forEach(function (p) { $("org-dept").appendChild(card(p, sub(p))); });
-    if (gm || mg.length) $("org-mgmt-line").hidden = false;
-    if (gm && mg.length) $("org-dept-line").hidden = false;
-    $("board-loading").hidden = true;
-    $("org-chart").hidden = false;
-  }).catch(function () {
-    $("board-loading").hidden = true;
-    $("board-error").hidden = false;
-  });
+  function make(tag, className, text) {
+    var el = document.createElement(tag);
+    if (className) el.className = className;
+    if (text !== undefined && text !== null) el.textContent = String(text);
+    return el;
+  }
+  function personCard(person, variant) {
+    var card = make("article", "org-person-card org-person-card--" + variant);
+    var photo = make("div", "org-photo");
+    photo.innerHTML = AVATAR;
+    var imagePath = typeof person.photo === "string" ? person.photo.trim() : "";
+    if (imagePath) {
+      var img = make("img");
+      img.src = imagePath;
+      img.alt = person.name ? "Photo of " + person.name : "Staff photo";
+      img.loading = "lazy";
+      img.onerror = function () { img.hidden = true; };
+      photo.appendChild(img);
+    }
+    var name = make("h4", "org-person-name", person.name || "Name to be added");
+    var title = make("p", "org-person-title", person.position || person.title || "");
+    card.appendChild(photo);
+    card.appendChild(name);
+    card.appendChild(title);
+    return card;
+  }
+  function addPeople(target, people, variant, positionKey) {
+    (people || []).forEach(function (person) {
+      if (!person || typeof person !== "object") return;
+      if (positionKey && !person.position) person.position = "";
+      target.appendChild(personCard(person, variant));
+    });
+  }
+  fetch("data/about.json?org-chart=20261125", { cache: "no-store" })
+    .then(function (response) {
+      if (!response.ok) throw new Error("Organizational chart data could not be loaded.");
+      return response.json();
+    })
+    .then(function (data) {
+      $("org-board").replaceChildren();
+      addPeople($("org-board"), data.board, "board", "position");
+      if (data.general_manager && data.general_manager.name) {
+        $("org-gm").appendChild(personCard(data.general_manager, "manager"));
+      }
+      $("org-gm-support").replaceChildren();
+      addPeople($("org-gm-support"), data.support_staff, "support", "title");
+
+      var divisions = $("org-divisions");
+      divisions.replaceChildren();
+      (data.divisions || []).forEach(function (division) {
+        var section = make("section", "org-division");
+        var heading = make("h3", "org-division-title", division.name || "Division");
+        var staff = make("div", "org-division-staff");
+        section.appendChild(heading);
+        addPeople(staff, division.positions, "staff", "title");
+        section.appendChild(staff);
+        divisions.appendChild(section);
+      });
+      $("board-loading").hidden = true;
+      $("board-error").hidden = true;
+      $("org-chart").hidden = false;
+    })
+    .catch(function (error) {
+      console.error("Organizational chart:", error);
+      $("board-loading").hidden = true;
+      $("board-error").hidden = false;
+    });
 }());
 </script>
 </body>

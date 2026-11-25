@@ -113,6 +113,21 @@ content:
     path: data/rates.json
     format: json
     fields:
+      - name: verified
+        label: Finance has verified the current rates?
+        type: boolean
+      - name: verification_note
+        label: Rate publication note
+        type: text
+      - name: minimum_consumption
+        label: Verified minimum consumption (cubic meters)
+        type: number
+      - name: minimum_charge
+        label: Verified minimum charge (PHP)
+        type: number
+      - name: excess_rate
+        label: Verified charge per additional cubic meter (PHP)
+        type: number
       - name: tiers
         label: Water rate tiers
         type: object
@@ -199,6 +214,9 @@ content:
             type: image
             options:
               media: images
+          - name: image_alt
+            label: Service photo description (optional)
+            type: string
           - name: requirements
             label: Requirements (optional)
             type: text
@@ -532,7 +550,7 @@ content:
                 label: Destination page
                 type: select
                 options:
-                  values: [payments.html, services.html, rates.html, contact.html, about.html, news.html, projects.html]
+                  values: [payments.html, services.html, rates.html, contact.html, about.html, news.html, services.html#projects-section]
               - name: icon
                 label: Icon style
                 type: select

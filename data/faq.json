@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "question": "How do I apply for a new water connection?",
+      "answer": "Visit the Services page for the full requirements checklist, or contact the CWD office with a valid ID and proof of property or lot rights to start an application."
+    },
+    {
+      "question": "Where can I pay my water bill?",
+      "answer": "Payment options can change. Check the Payments page for currently listed methods, or contact CWD to confirm an authorized channel before paying."
+    },
+    {
+      "question": "What happens if I pay late?",
+      "answer": "Late-payment charges should be confirmed against the current approved schedule. Please contact CWD or check the Rates & Fees page before relying on a penalty amount."
+    },
+    {
+      "question": "How do I report a leak?",
+      "answer": "Contact the office through the Contact page and provide the location of the leak so it can be referred for assessment."
+    },
+    {
+      "question": "My meter reading looks wrong. What do I do?",
+      "answer": "You may request a meter accuracy test through the Services page or by contacting the office directly."
+    },
+    {
+      "question": "Does CWD serve areas outside Camiling proper?",
+      "answer": "Check the current service-area list on the About Us page and contact CWD to confirm coverage for a specific address."
+    }
+  ]
+}

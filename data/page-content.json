@@ -50,7 +50,7 @@
     "shortcuts": [
       {
         "title": "Pay your water bill",
-        "description": "GCash, Maya, 7-Eleven, Bayad Center, and more.",
+        "description": "Review current payment instructions and options published by CWD.",
         "button": "View payment channels",
         "target": "payments.html",
         "icon": "wallet"
@@ -90,7 +90,7 @@
     "vision_body": "To be a model government water utility in Central Luzon, recognized for dependable service, sound governance, and a modern, responsive relationship with every barangay under our care.",
     "leadership_heading": "Organizational Chart & Leadership",
     "leadership_intro": "CWD is governed by a Board of Directors and managed day-to-day by the General Manager.",
-    "board_heading": "Board of Directors",
+    "board_heading": "Office of the Board Directors",
     "partnership_heading": "Public-Private Partnership",
     "partnership_intro": "CWD operates in partnership with the private sector to improve service delivery while retaining full public ownership of the water system.",
     "jva_heading": "Joint Venture with PrimeWater Infrastructure Corporation",
@@ -184,7 +184,7 @@
       },
       {
         "title": "Installation",
-        "description": "Meter installed and service activated, typically within [processing time — confirm]."
+        "description": "CWD staff will install the meter and activate service after requirements and applicable fees are completed."
       }
     ],
     "other_services_heading": "Other services",
@@ -228,13 +228,13 @@
   },
   "rates": {
     "title": "Rates & Fees",
-    "intro": "Current approved residential water rate schedule. Estimate your bill below, or view the full schedule further down the page.",
+    "intro": "Water rates and fees should be checked against the latest approved schedule. Use the estimate as a guide only when Finance has confirmed the figures.",
     "estimator_heading": "Bill Estimator",
     "estimator_intro": "Enter your estimated monthly water consumption to see an approximate charge (excludes penalties and other fees).",
     "consumption_label": "Consumption (cubic meters)",
     "consumption_placeholder": "e.g. 15",
     "estimate_button": "Estimate my bill",
-    "rate_notice": "Rate figures shown here are placeholders pending confirmation with Finance — do not publish until the actual approved schedule is confirmed in data/rates.json.",
+    "rate_notice": "Rate figures are pending confirmation by Finance. Do not rely on the estimate or publish these figures as approved until the current schedule is verified.",
     "rate_schedule_heading": "Rate Schedule",
     "rate_schedule_column_item": "Item",
     "rate_schedule_column_amount": "Amount",
@@ -320,7 +320,7 @@
     "documents_heading": "Transparency Documents",
     "charter_heading": "Citizen's Charter",
     "charter_intro": "CWD's Citizen's Charter describes the step-by-step procedure, requirements, fees, and processing time for each frontline service, as required under the Ease of Doing Business Act (RA 11032).",
-    "charter_placeholder": "[Full Citizen's Charter document/download link — pending from HR/Admin.]",
+    "charter_placeholder": "The Citizen's Charter document is pending upload by CWD. Please contact the office for the current approved copy.",
     "foi_heading": "Freedom of Information",
     "foi_intro": "CWD supports public access to official records under Executive Order No. 2, s. 2016 (Freedom of Information). You can view and track FOI requests filed with Camiling Water District through the official eFOI portal.",
     "foi_url": "https://www.foi.gov.ph/requests/?status=&category=&q=Camiling+Water+District",

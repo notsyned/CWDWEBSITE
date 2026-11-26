@@ -778,7 +778,7 @@ input, textarea, select {
 @media (max-width: 860px) { .home-hero-grid { grid-template-columns: 1fr; } .home-hero-photo { min-height: 220px; order: -1; } }
 
 /* ---------- News hero banner ---------- */
-.news-hero { position: relative; background: var(--teal-deep) url("news-bg.jpg") center / cover no-repeat; padding: 5rem 0; overflow: hidden; }
+.news-hero { position: relative; background: var(--teal-deep) url("water-background.svg") center / cover no-repeat; padding: 5rem 0; overflow: hidden; }
 .news-hero-overlay { position: absolute; inset: 0; background: rgba(7, 63, 82, 0.62); }
 .news-hero-content { position: relative; z-index: 1; }
 .news-hero-content h1 { color: var(--white); text-shadow: 0 1px 4px rgba(0,0,0,0.35); }

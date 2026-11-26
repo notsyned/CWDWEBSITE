@@ -25,8 +25,7 @@
     {
       "name": "Palawan Pawnshop",
       "description": "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. "
-    },
-    {}
+    }
   ],
   "notice_title": "Before you pay:",
   "notice_body": "Please confirm that a payment channel is currently authorized by CWD before sending money. Keep your official receipt or payment reference for your records."

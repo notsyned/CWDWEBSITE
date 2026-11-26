@@ -282,7 +282,7 @@
     "address_label": "Address:",
     "address": "Luna St., Camiling, Tarlac",
     "phone_label": "Mobile hotline:",
-    "phone": "(04593) 40304",
+    "phone": "(045) 934 0304",
     "phone_href": "tel:+6304593403040",
     "email_label": "Email:",
     "email": "Camilingwaterdistrict@gmail.com",
@@ -325,8 +325,7 @@
     "foi_intro": "CWD supports public access to official records under Executive Order No. 2, s. 2016 (Freedom of Information). You can view and track FOI requests filed with Camiling Water District through the official eFOI portal.",
     "foi_url": "https://www.foi.gov.ph/requests/?status=&category=&q=Camiling+Water+District",
     "foi_button": "View FOI Requests on eFOI Portal ↗",
-    "foi_contact_button": "Submit a Request via Contact",
-    "charter_document": ""
+    "foi_contact_button": "Submit a Request via Contact"
   },
   "search": {
     "title": "Search",

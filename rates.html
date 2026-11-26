@@ -103,13 +103,12 @@
     <div class="container">
 
       <!-- Official rate schedule PDF — shown by script only when schedule_pdf is set in data/rates.json -->
-      <p id="schedule-pdf-wrap" hidden style="margin-bottom:1.5rem;">
-        <a id="schedule-pdf-link" href="#" download
-           style="font-weight:700; font-size:0.95rem;"
-           aria-label="Download the official rate schedule (PDF)">
-          ⬇ Download the official rate schedule (PDF)
-        </a>
-      </p>
+      <div id="schedule-pdf-wrap" class="document-actions" hidden style="margin-bottom:1.5rem;">
+        <a id="schedule-pdf-view-link" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary"
+           aria-label="View the official rate schedule in a new tab">View the official rate schedule</a>
+        <a id="schedule-pdf-link" href="#" download class="btn btn-outline"
+           aria-label="Download the official rate schedule (PDF)">Download the official rate schedule (PDF)</a>
+      </div>
 
       <div class="card" style="max-width:560px;">
         <h3>Bill Estimator</h3>
@@ -157,14 +156,14 @@
   </div>
 </footer>
 
-<script src="assets/script.js?v=cms-audit-20261125"></script>
+<script src="assets/script.js?v=cms-binding-fix-20261126"></script>
 <script>
 (function () {
   var loadEl=document.getElementById("rates-loading"), errorEl=document.getElementById("rates-error");
   var emptyEl=document.getElementById("rates-empty"), tableWrap=document.getElementById("rates-table-wrap");
   var tbody=document.getElementById("rates-tbody"), estimateBtn=document.getElementById("estimate-btn");
   var result=document.getElementById("estimate-result"), pdfWrap=document.getElementById("schedule-pdf-wrap");
-  var pdfLink=document.getElementById("schedule-pdf-link"), notice=document.getElementById("rate-notice");
+  var pdfLink=document.getElementById("schedule-pdf-link"), pdfViewLink=document.getElementById("schedule-pdf-view-link"), notice=document.getElementById("rate-notice");
   function setEmpty(msg){if(emptyEl){emptyEl.textContent=msg||"Rates are temporarily unavailable while the approved schedule is being confirmed. Please contact CWD for current rates.";emptyEl.hidden=false;}if(tableWrap)tableWrap.hidden=true;if(estimateBtn)estimateBtn.disabled=true;}
   function addRow(label,amount){
     var tr=document.createElement("tr"), left=document.createElement("td"), right=document.createElement("td");
@@ -178,7 +177,7 @@
     .then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json();})
     .then(function(data){
       if(loadEl)loadEl.hidden=true;
-      if(data.schedule_pdf&&pdfWrap&&pdfLink){pdfLink.href=data.schedule_pdf;pdfWrap.hidden=false;}
+      if(data.schedule_pdf&&pdfWrap&&pdfLink){pdfLink.href=data.schedule_pdf;if(pdfViewLink)pdfViewLink.href=data.schedule_pdf;pdfWrap.hidden=false;}
       if(data.verified!==true){setEmpty(data.verification_note||"Rates are hidden until Finance verifies the current approved schedule.");return;}
       var tiers=Array.isArray(data.tiers)?data.tiers:[], fees=Array.isArray(data.fees)?data.fees:[];
       tbody.replaceChildren();tiers.forEach(function(t){if(t&&typeof t==="object")addRow(t.label||"Water rate",t.rate);});

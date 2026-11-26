@@ -192,6 +192,22 @@ document.addEventListener("DOMContentLoaded", function () {
     if (value !== undefined && value !== null) el.textContent = String(value);
     return el;
   }
+  function renderHeroImage(value) {
+    var img = query(".home-hero-cms-image");
+    if (!img) return;
+    var fallback = img.getAttribute("data-fallback-src") || img.getAttribute("src") || "";
+    var source = typeof value === "string" ? value.trim() : "";
+    if (!source) source = fallback;
+    if (!source) return;
+    img.onerror = null;
+    if (source !== fallback) {
+      img.onerror = function () {
+        img.onerror = null;
+        if (fallback && img.getAttribute("src") !== fallback) img.src = fallback;
+      };
+    }
+    img.src = source;
+  }
   function textNode(parent, value) { parent.appendChild(document.createTextNode(String(value || ""))); }
   function renderStats(items) {
     var parent = query(".home-stats-grid");
@@ -521,6 +537,7 @@ document.addEventListener("DOMContentLoaded", function () {
       renderSite(d.site);
 
       if (page === "index.html" && d.home) {
+        renderHeroImage(d.home.hero_image);
         renderStats(d.home.stats);
         renderShortcuts(d.home.shortcuts);
       }

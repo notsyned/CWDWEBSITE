@@ -229,26 +229,11 @@
   </div>
 </footer>
 
-<script src="assets/script.js?v=cms-audit-20261125"></script>
+<script src="assets/script.js?v=cms-binding-fix-20261126"></script>
 <script>
 (function () {
 
-  // ── 1. Announcement banner ─────────────────────────────────────
-  fetch("data/homepage.json")
-    .then(function (res) { return res.json(); })
-    .then(function (data) {
-      if (data.banner_show === true) {
-        var banner  = document.getElementById("site-banner");
-        var label   = document.getElementById("banner-label");
-        var message = document.getElementById("banner-message");
-        label.textContent   = data.banner_label   || "Notice";
-        message.textContent = data.banner_message || "";
-        banner.hidden = false;
-      }
-    })
-    .catch(function () { /* banner stays hidden on error */ });
-
-  // ── 2. Latest News — 3 newest from data/news.json ─────────────
+  // ── Latest News — 3 newest from data/news.json ─────────────
   var newsList    = document.getElementById("latest-news-list");
   var newsLoading = document.getElementById("latest-news-loading");
 

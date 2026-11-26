@@ -131,7 +131,7 @@
   </div>
 </footer>
 
-<script src="assets/script.js?v=cms-audit-20261125"></script>
+<script src="assets/script.js?v=cms-binding-fix-20261126"></script>
 <script>
 (function () {
   const list    = document.getElementById("news-list");
@@ -173,24 +173,30 @@
     p.textContent = item.body || "";
     article.appendChild(p);
 
-    // Attachments — optional list of {name, file}
+    // Attachments — optional list of {name, file}; provide both preview and download.
     if (item.attachments && item.attachments.length > 0) {
       const attList = document.createElement("ul");
       attList.style.cssText = "list-style:none; padding:0; margin-top:0.75rem;";
       item.attachments.forEach(function (att) {
         if (!att.file || !att.name) return;
-        const li  = document.createElement("li");
-        li.style.marginBottom = "0.35rem";
-        const a   = document.createElement("a");
-        a.href     = att.file;
-        a.download = "";
-        // Accessible: name + file type in link text so context is clear out of flow
-        a.textContent = att.name + " (PDF)";
-        a.style.cssText = "font-size:0.88rem; font-weight:600;";
-        // Announce download intent to screen readers
-        a.setAttribute("aria-label", "Download " + att.name + " (PDF)");
-        li.appendChild(a);
-        attList.appendChild(li);
+        const li = document.createElement("li");
+        li.className = "attachment-item";
+        li.style.marginBottom = "0.75rem";
+        const label = document.createElement("p");
+        label.textContent = att.name;
+        label.style.cssText = "font-size:0.88rem; font-weight:600; margin-bottom:0.35rem;";
+        const actions = document.createElement("div");
+        actions.className = "document-actions";
+        const view = document.createElement("a");
+        view.href = att.file; view.target = "_blank"; view.rel = "noopener noreferrer";
+        view.className = "btn btn-primary"; view.textContent = "View PDF";
+        view.setAttribute("aria-label", "View " + att.name + " in a new tab");
+        const download = document.createElement("a");
+        download.href = att.file; download.download = "";
+        download.className = "btn btn-outline"; download.textContent = "Download PDF";
+        download.setAttribute("aria-label", "Download " + att.name);
+        actions.appendChild(view); actions.appendChild(download);
+        li.appendChild(label); li.appendChild(actions); attList.appendChild(li);
       });
       if (attList.children.length > 0) article.appendChild(attList);
     }

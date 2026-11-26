@@ -155,7 +155,7 @@
   </div>
 </footer>
 
-<script src="assets/script.js?v=cms-audit-20261125"></script>
+<script src="assets/script.js?v=cms-binding-fix-20261126"></script>
 <script>
 (function () {
   const list    = document.getElementById("careers-list");
@@ -208,15 +208,17 @@
       article.appendChild(dl);
     }
 
-    // Document download link
+    // Job posting PDF: offer preview and download.
     if (item.document) {
-      const link = document.createElement("a");
-      link.href = item.document;
-      link.textContent = "⬇ Download Job Posting";
-      link.className = "btn btn-outline";
-      link.style.cssText = "margin-top:1rem; font-size:0.85rem;";
-      link.setAttribute("download", "");
-      article.appendChild(link);
+      const actions = document.createElement("div");
+      actions.className = "document-actions"; actions.style.marginTop = "1rem";
+      const view = document.createElement("a");
+      view.href = item.document; view.target = "_blank"; view.rel = "noopener noreferrer";
+      view.textContent = "View Job Posting"; view.className = "btn btn-primary";
+      const download = document.createElement("a");
+      download.href = item.document; download.textContent = "Download Job Posting";
+      download.className = "btn btn-outline"; download.setAttribute("download", "");
+      actions.appendChild(view); actions.appendChild(download); article.appendChild(actions);
     }
 
     return article;
